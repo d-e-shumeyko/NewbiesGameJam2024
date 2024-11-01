@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ciljhucct84cu"]
+
+[node name="world" type="Node3D"]
+
+[node name="levels" type="Node" parent="."]
+
+[node name="level 1" type="Node3D" parent="levels"]
