@@ -1,7 +1,79 @@
-[gd_scene format=3 uid="uid://ciljhucct84cu"]
+[gd_scene load_steps=7 format=3 uid="uid://ciljhucct84cu"]
+
+[ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_x7ghb"]
+[ext_resource type="Script" path="res://scripts/playerChara.gd" id="2_r03mj"]
+[ext_resource type="PackedScene" uid="uid://spymn3nqgmfh" path="res://characterModels/charaNo3.blend" id="3_ess6u"]
+[ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="4_oomq4"]
+[ext_resource type="Script" path="res://GameManager.gd" id="5_xrrph"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e4bw5"]
+radius = 0.158006
+height = 1.14445
 
 [node name="world" type="Node3D"]
+process_mode = 3
 
 [node name="levels" type="Node" parent="."]
+process_mode = 3
 
 [node name="level 1" type="Node3D" parent="levels"]
+process_mode = 1
+
+[node name="GridMap" type="GridMap" parent="levels/level 1"]
+mesh_library = ExtResource("1_x7ghb")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(65535, 0, 1, 0, 0, 1, 0, 1, 1, 65535, 1, 1, 0, 2, 1, 65535, 2, 1, 65534, 2, 1, 65534, 1, 1, 65534, 0, 1, 65534, 65535, 1, 65535, 65535, 1, 0, 65535, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 65534, 1, 0, 65534, 1, 65535, 65534, 1, 65534, 65534, 1, 65534, 65533, 1, 65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 2, 2, 1, 2, 1, 1, 2, 0, 1, 2, 65535, 1, 2, 65534, 1, 2, 65533, 1, 65533, 65533, 1, 65533, 65534, 1, 65533, 65535, 1, 65533, 2, 1, 65533, 1, 1, 65533, 0, 1, 65531, 3, 1, 65532, 3, 1, 65533, 3, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 65532, 65532, 1, 65533, 65532, 1, 65534, 65532, 1, 65535, 65532, 1, 0, 65532, 1, 1, 65532, 1, 2, 65532, 1, 3, 65532, 1, 3, 65533, 1, 3, 65534, 1, 3, 65535, 1, 3, 0, 1, 3, 1, 1, 3, 2, 1, 65532, 2, 1, 65532, 1, 1, 65532, 0, 1, 65532, 65535, 1, 65532, 65534, 1, 65532, 65533, 1, 65531, 2, 1, 65531, 1, 1, 65531, 0, 1, 65531, 65535, 1, 65531, 65534, 1, 65531, 65533, 1, 65531, 65532, 1, 1, 65531, 2, 2, 65531, 2, 3, 65531, 2, 4, 65532, 1441794, 4, 65533, 1441794, 4, 65534, 1441794, 4, 1, 1441794, 4, 2, 1441794, 4, 3, 1441794, 3, 4, 655362, 2, 4, 655362, 1, 4, 655362, 65534, 4, 655362, 65533, 4, 655362, 65532, 4, 655362, 65531, 4, 655362, 65530, 3, 1048578, 65530, 2, 1048578, 65530, 1, 1048578, 65530, 65534, 1048578, 65530, 65533, 1048578, 65530, 65532, 1048578, 65531, 65531, 2, 65532, 65531, 2, 65533, 65531, 2, 65534, 65531, 2, 0, 5, 1441794, 65535, 5, 1048578, 5, 0, 655362, 5, 65535, 2, 0, 65530, 1441794, 65535, 65530, 1048578, 65529, 0, 655362, 65529, 65535, 2, 0, 4, 1441795, 65535, 4, 655363, 4, 0, 1441795, 4, 65535, 3, 0, 65531, 3, 65535, 65531, 1048579, 65530, 65535, 1048579, 65530, 0, 655363, 4, 4, 1441792, 4, 65531, 0, 65530, 65531, 1048576, 65530, 4, 655360)
+}
+
+[node name="Player" type="CharacterBody3D" parent="levels/level 1"]
+script = ExtResource("2_r03mj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10793, 0)
+shape = SubResource("CapsuleShape3D_e4bw5")
+
+[node name="charaNo3" parent="levels/level 1/Player" instance=ExtResource("3_ess6u")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.519, 0)
+
+[node name="head" type="Node3D" parent="levels/level 1/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76674, -0.131151)
+
+[node name="Camera3D" type="Camera3D" parent="levels/level 1/Player/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.128618, 0.0335844)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/Player/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25313, 0)
+spot_range = 3.60994
+spot_angle = 13.8716
+
+[node name="RayCast3D" type="RayCast3D" parent="levels/level 1/Player/head"]
+transform = Transform3D(1, 0, 0, 0, -1.31134e-07, -1, 0, 3, -4.37114e-08, 0, 0, 0)
+
+[node name="Menus" type="CanvasGroup" parent="levels"]
+process_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="levels/Menus"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 575.0
+offset_top = 280.0
+offset_right = 615.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="levels/Menus/VBoxContainer" node_paths=PackedStringArray("game_manager")]
+layout_mode = 2
+text = "~Pause~"
+script = ExtResource("4_oomq4")
+game_manager = NodePath("../../../../gameManager")
+
+[node name="gameManager" type="Node3D" parent="."]
+script = ExtResource("5_xrrph")
