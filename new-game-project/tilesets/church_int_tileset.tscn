@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3wt2tn6085hn"]
+
+[ext_resource type="PackedScene" uid="uid://csymie8inqlh7" path="res://Assets/churchIntTileset.glb" id="1_ls13m"]
+
+[node name="churchIntTileset" instance=ExtResource("1_ls13m")]

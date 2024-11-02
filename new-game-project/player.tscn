@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqhxgtq4yx2wo"]
+
+[ext_resource type="Script" path="res://scripts/playerChara.gd" id="1_8sd86"]
+[ext_resource type="PackedScene" uid="uid://spymn3nqgmfh" path="res://characterModels/charaNo3.blend" id="2_uiwyg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e4bw5"]
+radius = 0.158006
+height = 1.14445
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_8sd86")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10793, 0)
+shape = SubResource("CapsuleShape3D_e4bw5")
+
+[node name="charaNo3" parent="." instance=ExtResource("2_uiwyg")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.519, 0)
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76674, -0.131151)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.128618, 0.0335844)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25313, 0)
+spot_range = 3.60994
+spot_angle = 13.8716
+
+[node name="RayCast3D" type="RayCast3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, -1.31134e-07, -1, 0, 3, -4.37114e-08, 0, 0, 0)
