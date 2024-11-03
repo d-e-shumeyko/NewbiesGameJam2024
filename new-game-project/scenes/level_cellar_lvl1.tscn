@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ciljhucct84cu"]
+[gd_scene load_steps=16 format=3 uid="uid://ciljhucct84cu"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_um21k"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_ipr0e"]
@@ -6,9 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://bjdc6mtc6h1aq" path="res://Assets/trapDoorFrame.glb" id="4_ldtxn"]
 [ext_resource type="PackedScene" uid="uid://duwfiull4iqwk" path="res://Assets/trapDoor.glb" id="5_m4oy1"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="6_6galk"]
+[ext_resource type="PackedScene" uid="uid://c4agx2wpdigj2" path="res://Assets/Lamp.glb" id="6_jaw1d"]
+[ext_resource type="PackedScene" uid="uid://mbreaboira3w" path="res://Assets/lever.glb" id="7_6jeie"]
 [ext_resource type="Script" path="res://GameManager.gd" id="7_fgnsi"]
+[ext_resource type="PackedScene" uid="uid://cw7a7o46j783m" path="res://Assets/leverPort.glb" id="8_4each"]
+[ext_resource type="Script" path="res://scripts/lever.gd" id="8_6nmwm"]
+[ext_resource type="PackedScene" uid="uid://bagtdoa8vs7ka" path="res://Assets/doorway.glb" id="9_sh2dp"]
+[ext_resource type="PackedScene" uid="uid://b5drf46e3h82n" path="res://Assets/door.glb" id="10_80xiq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ty7n6"]
+size = Vector3(0.595337, 3.50201, 1.11914)
 
 [sub_resource type="Environment" id="Environment_s3jcp"]
+fog_light_energy = 0.05
+fog_density = 0.5
+fog_sky_affect = 0.0
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -23,7 +35,7 @@ process_mode = 1
 mesh_library = ExtResource("1_um21k")
 cell_size = Vector3(1, 1, 1)
 data = {
-"cells": PackedInt32Array(65535, 0, 1, 0, 0, 1, 0, 1, 1, 65535, 1, 1, 0, 2, 1, 65535, 2, 1, 65534, 2, 1, 65534, 1, 1, 65534, 0, 1, 65534, 65535, 1, 65535, 65535, 1, 0, 65535, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 65534, 1, 0, 65534, 1, 65535, 65534, 1, 65534, 65534, 1, 65534, 65533, 1, 65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 2, 2, 1, 2, 1, 1, 2, 0, 1, 2, 65535, 1, 2, 65534, 1, 2, 65533, 1, 65533, 65533, 1, 65533, 65534, 1, 65533, 65535, 1, 65533, 2, 1, 65533, 1, 1, 65533, 0, 1, 65531, 3, 1, 65532, 3, 1, 65533, 3, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 65532, 65532, 1, 65533, 65532, 1, 65534, 65532, 1, 65535, 65532, 1, 0, 65532, 1, 1, 65532, 1, 2, 65532, 1, 3, 65532, 1, 3, 65533, 1, 3, 65534, 1, 3, 65535, 1, 3, 0, 1, 3, 1, 1, 3, 2, 1, 65532, 2, 1, 65532, 1, 1, 65532, 0, 1, 65532, 65535, 1, 65532, 65534, 1, 65532, 65533, 1, 65531, 2, 1, 65531, 1, 1, 65531, 0, 1, 65531, 65535, 1, 65531, 65534, 1, 65531, 65533, 1, 65531, 65532, 1, 1, 65531, 2, 2, 65531, 2, 3, 65531, 2, 4, 65532, 1441794, 4, 65533, 1441794, 4, 65534, 1441794, 4, 1, 1441794, 4, 2, 1441794, 4, 3, 1441794, 3, 4, 655362, 2, 4, 655362, 1, 4, 655362, 65533, 4, 655362, 65532, 4, 655362, 65531, 4, 655362, 65530, 3, 1048578, 65530, 2, 1048578, 65530, 1, 1048578, 65530, 65534, 1048578, 65530, 65533, 1048578, 65530, 65532, 1048578, 65531, 65531, 2, 65532, 65531, 2, 65533, 65531, 2, 65534, 65531, 2, 0, 5, 1441794, 65535, 5, 1048578, 5, 0, 655362, 5, 65535, 2, 0, 65530, 1441794, 65535, 65530, 1048578, 65529, 0, 655362, 65529, 65535, 2, 0, 4, 1441795, 65535, 4, 655363, 4, 0, 1441795, 4, 65535, 3, 0, 65531, 3, 65535, 65531, 1048579, 65530, 65535, 1048579, 65530, 0, 655363, 4, 4, 1441792, 4, 65531, 0, 65530, 65531, 1048576, 65530, 4, 655360, 0, 6, 1, 65535, 6, 1, 65535, 7, 1, 0, 7, 1, 1, 7, 1441794, 65534, 7, 1048578, 0, 8, 1048577, 0, 9, 655362, 65535, 9, 655362, 65534, 8, 1048578, 1, 8, 1441794, 1, 9, 1441792, 65534, 9, 655360, 65534, 4, 655362, 65534, 6, 1048576, 1, 6, 0, 65535, 8, 1)
+"cells": PackedInt32Array(65535, 0, 1, 0, 0, 1, 0, 1, 1, 65535, 1, 1, 0, 2, 1, 65535, 2, 1, 65534, 2, 1, 65534, 1, 1, 65534, 0, 1, 65534, 65535, 1, 65535, 65535, 1, 0, 65535, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 65534, 1, 0, 65534, 1, 65535, 65534, 1, 65534, 65534, 1, 65534, 65533, 1, 65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 2, 2, 1, 2, 1, 1, 2, 0, 1, 2, 65535, 1, 2, 65534, 1, 2, 65533, 1, 65533, 65533, 1, 65533, 65534, 1, 65533, 65535, 1, 65533, 2, 1, 65533, 1, 1, 65533, 0, 1, 65531, 3, 1, 65532, 3, 1, 65533, 3, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 65532, 65532, 1, 65533, 65532, 1, 65534, 65532, 1, 65535, 65532, 1, 0, 65532, 1, 1, 65532, 1, 2, 65532, 1, 3, 65532, 1, 3, 65533, 1, 3, 65534, 1, 3, 65535, 1, 3, 0, 1, 3, 1, 1, 3, 2, 1, 65532, 2, 1, 65532, 1, 1, 65532, 0, 1, 65532, 65535, 1, 65532, 65534, 1, 65532, 65533, 1, 65531, 2, 1, 65531, 1, 1, 65531, 0, 1, 65531, 65535, 1, 65531, 65534, 1, 65531, 65533, 1, 65531, 65532, 1, 1, 65531, 2, 2, 65531, 2, 3, 65531, 2, 4, 65532, 1441794, 4, 65533, 1441794, 4, 65534, 1441794, 4, 1, 1441794, 4, 2, 1441794, 4, 3, 1441794, 3, 4, 655362, 2, 4, 655362, 1, 4, 655362, 65533, 4, 655362, 65532, 4, 655362, 65531, 4, 655362, 65530, 3, 1048578, 65530, 2, 1048578, 65530, 1, 1048578, 65530, 65534, 1048578, 65530, 65533, 1048578, 65530, 65532, 1048578, 65531, 65531, 2, 65532, 65531, 2, 0, 5, 1441794, 65535, 5, 1048578, 5, 0, 655362, 5, 65535, 2, 65529, 0, 655362, 65529, 65535, 2, 0, 4, 1441795, 65535, 4, 655363, 4, 0, 1441795, 4, 65535, 3, 0, 65531, 3, 65530, 65535, 1048579, 65530, 0, 655363, 4, 4, 1441792, 4, 65531, 0, 65530, 65531, 1048576, 65530, 4, 655360, 0, 7, 1, 1, 7, 1441794, 65534, 7, 1048578, 0, 8, 1048577, 0, 9, 655362, 65535, 9, 655362, 65534, 8, 1048578, 1, 8, 1441794, 1, 9, 1441792, 65534, 9, 655360, 65534, 4, 655362, 65534, 6, 1048576, 1, 6, 0, 65535, 8, 1, 65533, 65531, 2, 65535, 65531, 1048579, 65534, 65531, 2, 65535, 65530, 1048578, 0, 65530, 1441794, 0, 65529, 1441794, 65535, 65529, 1048578, 65535, 65528, 1048578, 65535, 65527, 1048578, 65535, 65526, 1048578, 65535, 65525, 1048578, 0, 65528, 1441794, 0, 65527, 1441794, 0, 65525, 1441794, 0, 65526, 1441794, 1, 65524, 655362, 2, 65524, 655362, 3, 65524, 655362, 4, 65524, 655362, 0, 65524, 1441795, 65535, 65523, 1048576, 65535, 65524, 1048578, 0, 65523, 2, 1, 65523, 2, 2, 65523, 2, 3, 65523, 2, 4, 65523, 2, 5, 65522, 1048578, 5, 65525, 1048578, 6, 65526, 655362, 7, 65526, 655362, 8, 65525, 1441794, 8, 65524, 1441794, 8, 65523, 1441794, 6, 65521, 2, 7, 65521, 2, 8, 65522, 1441794, 8, 65526, 1441792, 5, 65526, 655360, 5, 65521, 1048576, 8, 65521, 0, 5, 65523, 1048579, 6, 65525, 1048577, 6, 65524, 1048577, 6, 65523, 1048577, 6, 65522, 1048577, 7, 65522, 1048577, 7, 65523, 1048577, 7, 65524, 1048577, 7, 65525, 1048577, 5, 65524, 655363, 65535, 7, 1, 65535, 6, 1048579, 0, 6, 3, 6, 65535, 2, 7, 65535, 2, 8, 65535, 2, 9, 65535, 2, 10, 65535, 2, 6, 0, 655362, 8, 0, 655362, 7, 0, 655362, 9, 0, 655362, 10, 0, 655362, 11, 65534, 1048578, 11, 65533, 1048578, 11, 65532, 1048578, 11, 65531, 1048578, 11, 65530, 1048578, 11, 65529, 1048578, 11, 65528, 1048578, 11, 65527, 1048578, 11, 65526, 1048578, 11, 65525, 1048578, 12, 65534, 1441794, 12, 65533, 1441794, 12, 65532, 1441794, 12, 65531, 1441794, 12, 65530, 1441794, 12, 65529, 1441794, 12, 65528, 1441794, 12, 65527, 1441794, 12, 65526, 1441794, 12, 65525, 1441794, 11, 65524, 1048576, 12, 65524, 0, 11, 65535, 1048579, 12, 0, 1441792, 12, 65535, 1441794, 11, 0, 655362, 65528, 65535, 2, 65527, 65535, 2, 65526, 65535, 2, 65525, 65535, 2, 65524, 65535, 2, 65523, 65535, 2, 65522, 65535, 2, 65528, 0, 655362, 65527, 0, 655362, 65526, 0, 655362, 65525, 0, 655362, 65524, 0, 655362, 65523, 0, 655362, 65522, 0, 655362, 65521, 1, 1441794, 65521, 2, 1441794, 65521, 3, 1441794, 65521, 4, 1441794, 65521, 5, 1441794, 65522, 6, 2, 65523, 6, 2, 65524, 6, 2, 65520, 1, 1048578, 65520, 2, 1048578, 65520, 3, 1048578, 65520, 4, 1048578, 65520, 5, 1048578, 65519, 6, 2, 65518, 6, 2, 65517, 6, 2, 65525, 7, 1441794, 65525, 8, 1441794, 65525, 9, 1441794, 65524, 10, 655362, 65523, 10, 655362, 65522, 10, 655362, 65521, 10, 655362, 65520, 10, 655362, 65519, 10, 655362, 65516, 7, 1048578, 65516, 8, 1048578, 65516, 9, 1048578, 65517, 10, 655362, 65518, 10, 655362, 65516, 10, 655360, 65516, 6, 1048576, 65525, 6, 0, 65525, 10, 1441792, 65520, 65535, 1048576, 65520, 0, 1048578, 65521, 65535, 2, 65521, 6, 3, 65521, 0, 1441795, 65520, 6, 1048579, 65517, 7, 1048577, 65518, 7, 1048577, 65519, 7, 1048577, 65520, 7, 1048577, 65521, 7, 1048577, 65522, 7, 1048577, 65523, 7, 1048577, 65524, 7, 1048577, 65524, 8, 1048577, 65523, 8, 1048577, 65522, 8, 1048577, 65521, 8, 1048577, 65520, 8, 1048577, 65519, 8, 1048577, 65518, 8, 1048577, 65517, 8, 1048577, 65517, 9, 1048577, 65518, 9, 1048577, 65519, 9, 1048577, 65520, 9, 1048577, 65521, 9, 1048577, 65522, 9, 1048577, 65523, 9, 1048577, 65524, 9, 1048577)
 }
 
 [node name="Player" parent="levels/level 1" instance=ExtResource("2_ipr0e")]
@@ -39,8 +51,133 @@ transform = Transform3D(-0.3, 2.62268e-08, 0, -2.62268e-08, -0.3, 0, 0, 0, 0.3, 
 [node name="trapDoor" parent="levels/level 1/decoration/trapDoorFrame" instance=ExtResource("5_m4oy1")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2.98023e-08, 0.101406, 0)
 
+[node name="lamps" type="Node" parent="levels/level 1/decoration"]
+
+[node name="Lamp" parent="levels/level 1/decoration/lamps" instance=ExtResource("6_jaw1d")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.762329, 2.42786, 1.46186)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp4" parent="levels/level 1/decoration/lamps" instance=ExtResource("6_jaw1d")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -14.9424, 2.42786, 0.110318)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp5" parent="levels/level 1/decoration/lamps" instance=ExtResource("6_jaw1d")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -14.9424, 2.42786, 8.52116)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 3.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp3" parent="levels/level 1/decoration/lamps" instance=ExtResource("6_jaw1d")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.293198, 2.42786, -11.9642)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp2" parent="levels/level 1/decoration/lamps" instance=ExtResource("6_jaw1d")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 11.9991, 2.42786, -0.213605)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="lever" parent="levels/level 1/decoration" instance=ExtResource("7_6jeie")]
+transform = Transform3D(-1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0, 0.25, -14.4483, 0.525024, 8.39303)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/decoration/lever" node_paths=PackedStringArray("player")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_6nmwm")
+player = NodePath("../../../Player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/lever/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120244, 1.6276, -0.0542145)
+shape = SubResource("BoxShape3D_ty7n6")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="levels/level 1/decoration/lever/StaticBody3D"]
+
+[node name="Label" type="Label" parent="levels/level 1/decoration/lever/StaticBody3D/CanvasGroup"]
+visible = false
+offset_left = 585.0
+offset_top = 298.0
+offset_right = 688.0
+offset_bottom = 321.0
+text = "Pick up Lever
+"
+
+[node name="leverPort" parent="levels/level 1/decoration" instance=ExtResource("8_4each")]
+transform = Transform3D(-1.09278e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.09278e-08, 6.77672, 0.5, -13.7278)
+
+[node name="doorway" parent="levels/level 1/decoration" instance=ExtResource("9_sh2dp")]
+transform = Transform3D(-1.96701e-08, 0, 0.45, 0, 0.45, 0, -0.45, 0, -1.96701e-08, 8.948, 0.500168, -12.1219)
+
+[node name="door" parent="levels/level 1/decoration/doorway" instance=ExtResource("10_80xiq")]
+
 [node name="Menus" type="CanvasGroup" parent="levels"]
 process_mode = 2
+position = Vector2(544, 250)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="levels/Menus"]
 anchors_preset = 8
@@ -48,10 +185,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 575.0
-offset_top = 280.0
-offset_right = 615.0
-offset_bottom = 320.0
+offset_right = 65.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -69,3 +204,22 @@ script = ExtResource("7_fgnsi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_s3jcp")
+
+[node name="empty_takeable" type="StaticBody3D" parent="." node_paths=PackedStringArray("player")]
+transform = Transform3D(-1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0, 0.25, -8.05933, 0.525024, 8.39303)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_6nmwm")
+player = NodePath("../levels/level 1/Player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="empty_takeable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120244, 1.6276, -0.0542145)
+shape = SubResource("BoxShape3D_ty7n6")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="empty_takeable"]
+
+[node name="Label" type="Label" parent="empty_takeable/CanvasGroup"]
+offset_left = 585.0
+offset_top = 298.0
+offset_right = 688.0
+offset_bottom = 321.0

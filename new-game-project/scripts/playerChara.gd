@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-class_name playerChar
+class_name playerChara
 
 const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
@@ -19,7 +19,7 @@ const  BOB_AMP = 0.08
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
 
-
+#signal currentlyInteracting(now_colliding : bool)
 signal objectInteractedWith(is_interacted : bool)
 
 var was_interacted : bool = false :
@@ -27,12 +27,25 @@ var was_interacted : bool = false :
 		return was_interacted
 	set(value):
 		was_interacted = value
+		
+
+#var is_now_colliding : bool = false:
+	#get:
+		#return is_now_colliding
+	#set(value):
+		#is_now_colliding = value
+	
 	
 
 @onready var head = $head
 @onready var camera = $head/Camera3D
 @onready var body = $charaNo3
-@onready var raycast : RayCast3D = $head/RayCast3D
+@onready var raycast : RayCast3D = $head/Camera3D/RayCast3D
+
+
+@onready var collider_info : takeable =$"../../../empty_takeable"
+
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -42,6 +55,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		body.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -81,6 +95,31 @@ func _physics_process(delta: float) -> void:
 	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED*2)
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+	
+	#Action prompt
+	if raycast.is_colliding():
+		var hit = raycast.get_collider()
+		collider_info = raycast.get_collider()
+		if (hit != null ):
+			if (hit.info !=null):	
+				hit.info.show()
+	else:
+		if (collider_info.info != null):
+			collider_info.info.hide()
+			
+			
+	
+			
+			
+			
+				
+		#print(hit.name)
+		#hit.show_info()
+		#if (!raycast.is_colliding()):
+			#emit_signal("currentlyInteracting", is_now_colliding)
+
+	
+		
 
 	move_and_slide()
 
@@ -90,8 +129,8 @@ func _headbob(time) -> Vector3:
 	pos.x = cos(time * BOB_FREQ/2) *BOB_AMP
 	return pos 
 	
-#func _input(event: InputEvent):
-#	if (event.is_action_pressed("Interact") and raycast.is_colliding()):
-#		print_debug("hit") 
-#		was_interacted = true
-#		emit_signal("objectInteractedWith", was_interacted)
+func _input(event: InputEvent):
+	if (event.is_action_pressed("Interact") and raycast.is_colliding()):
+		print_debug("hit") 
+		was_interacted = true
+		emit_signal("objectInteractedWith", was_interacted)
