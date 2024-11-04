@@ -43,7 +43,7 @@ var was_interacted : bool = false :
 @onready var raycast : RayCast3D = $head/Camera3D/RayCast3D
 
 
-@onready var collider_info : takeable =$"../../../empty_takeable"
+@export var collider_info : takeable
 
 
 func _ready() -> void:
@@ -103,9 +103,9 @@ func _physics_process(delta: float) -> void:
 		if (hit != null ):
 			if (hit.info !=null):	
 				hit.info.show()
-	else:
-		if (collider_info.info != null):
-			collider_info.info.hide()
+	#else:
+		#if (collider_info.info != null):
+			#collider_info.info.hide()
 			
 			
 	
@@ -134,3 +134,4 @@ func _input(event: InputEvent):
 		print_debug("hit") 
 		was_interacted = true
 		emit_signal("objectInteractedWith", was_interacted)
+		was_interacted = false

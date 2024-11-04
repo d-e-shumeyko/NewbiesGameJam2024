@@ -1,11 +1,70 @@
-[gd_scene load_steps=6 format=3 uid="uid://s3f2nni3y2h3"]
+[gd_scene load_steps=19 format=3 uid="uid://s3f2nni3y2h3"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_md7vo"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_af2gc"]
+[ext_resource type="PackedScene" uid="uid://c4agx2wpdigj2" path="res://Assets/Lamp.glb" id="3_nn6xh"]
+[ext_resource type="Script" path="res://scripts/lever.gd" id="6_4b1ey"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="6_6baq6"]
 [ext_resource type="Script" path="res://GameManager.gd" id="7_cmkc4"]
+[ext_resource type="PackedScene" uid="uid://bagtdoa8vs7ka" path="res://Assets/doorway.glb" id="7_rkrsp"]
+[ext_resource type="PackedScene" uid="uid://b5drf46e3h82n" path="res://Assets/door.glb" id="8_di26d"]
 
-[sub_resource type="Environment" id="Environment_s3jcp"]
+[sub_resource type="BoxMesh" id="BoxMesh_efsli"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dtxvn"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u8i3q"]
+
+[sub_resource type="Environment" id="Environment_mrsqv"]
+fog_light_energy = 0.05
+fog_density = 0.5
+fog_sky_affect = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bfvah"]
+size = Vector3(0.595337, 3.50201, 1.11914)
+
+[sub_resource type="Animation" id="Animation_limuc"]
+resource_name = "door_open"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -4.54052, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7sbs8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1eh3k"]
+_data = {
+"RESET": SubResource("Animation_7sbs8"),
+"door_open": SubResource("Animation_limuc")
+}
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hpyfx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bar6"]
+albedo_color = Color(0, 0, 0, 1)
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -20,12 +79,262 @@ process_mode = 1
 mesh_library = ExtResource("1_md7vo")
 cell_size = Vector3(1, 1, 1)
 data = {
-"cells": PackedInt32Array(65535, 0, 1, 0, 0, 1, 0, 1, 1, 65535, 1, 1, 0, 2, 1, 65535, 2, 1, 65534, 2, 1, 65534, 1, 1, 65534, 0, 1, 65534, 65535, 1, 65535, 65535, 1, 0, 65535, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 65534, 1, 0, 65534, 1, 65535, 65534, 1, 65534, 65534, 1, 65534, 65533, 1, 65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 2, 2, 1, 2, 1, 1, 2, 0, 1, 2, 65535, 1, 2, 65534, 1, 2, 65533, 1, 65533, 65533, 1, 65533, 65534, 1, 65533, 65535, 1, 65533, 2, 1, 65533, 1, 1, 65533, 0, 1, 65531, 3, 1, 65532, 3, 1, 65533, 3, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 65532, 65532, 1, 65533, 65532, 1, 65534, 65532, 1, 65535, 65532, 1, 0, 65532, 1, 1, 65532, 1, 2, 65532, 1, 3, 65532, 1, 3, 65533, 1, 3, 65534, 1, 3, 65535, 1, 3, 0, 1, 3, 1, 1, 3, 2, 1, 65532, 2, 1, 65532, 1, 1, 65532, 0, 1, 65532, 65535, 1, 65532, 65534, 1, 65532, 65533, 1, 65531, 2, 1, 65531, 1, 1, 65531, 0, 1, 65531, 65535, 1, 65531, 65534, 1, 65531, 65533, 1, 65531, 65532, 1, 1, 65531, 2, 2, 65531, 2, 3, 65531, 2, 4, 65532, 1441794, 4, 65533, 1441794, 4, 65534, 1441794, 4, 1, 1441794, 4, 2, 1441794, 4, 3, 1441794, 3, 4, 655362, 2, 4, 655362, 1, 4, 655362, 65533, 4, 655362, 65532, 4, 655362, 65531, 4, 655362, 65530, 3, 1048578, 65530, 2, 1048578, 65530, 1, 1048578, 65530, 65534, 1048578, 65530, 65533, 1048578, 65530, 65532, 1048578, 65531, 65531, 2, 65532, 65531, 2, 65533, 65531, 2, 65534, 65531, 2, 0, 5, 1441794, 65535, 5, 1048578, 5, 0, 655362, 5, 65535, 2, 0, 65530, 1441794, 65535, 65530, 1048578, 65529, 0, 655362, 65529, 65535, 2, 0, 4, 1441795, 65535, 4, 655363, 4, 0, 1441795, 4, 65535, 3, 0, 65531, 3, 65535, 65531, 1048579, 65530, 65535, 1048579, 65530, 0, 655363, 4, 4, 1441792, 4, 65531, 0, 65530, 65531, 1048576, 65530, 4, 655360, 65534, 4, 655362)
+"cells": PackedInt32Array(65535, 0, 1, 0, 0, 1, 0, 1, 1, 65535, 1, 1, 0, 2, 1, 65535, 2, 1, 65534, 2, 1, 65534, 1, 1, 65534, 0, 1, 65534, 65535, 1, 65535, 65535, 1, 0, 65535, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 65534, 1, 0, 65534, 1, 65535, 65534, 1, 65534, 65534, 1, 65534, 65533, 1, 65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 2, 2, 1, 2, 1, 1, 2, 0, 1, 2, 65535, 1, 2, 65534, 1, 2, 65533, 1, 65533, 65533, 1, 65533, 65534, 1, 65533, 65535, 1, 65533, 2, 1, 65533, 1, 1, 65533, 0, 1, 65531, 3, 1, 65532, 3, 1, 65533, 3, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 65532, 65532, 1, 65533, 65532, 1, 65534, 65532, 1, 65535, 65532, 1, 0, 65532, 1, 1, 65532, 1, 2, 65532, 1, 3, 65532, 1, 3, 65533, 1, 3, 65534, 1, 3, 65535, 1, 3, 0, 1, 3, 1, 1, 3, 2, 1, 65532, 2, 1, 65532, 1, 1, 65532, 0, 1, 65532, 65535, 1, 65532, 65534, 1, 65532, 65533, 1, 65531, 2, 1, 65531, 1, 1, 65531, 0, 1, 65531, 65535, 1, 65531, 65534, 1, 65531, 65533, 1, 65531, 65532, 1, 1, 65531, 2, 2, 65531, 2, 3, 65531, 2, 4, 65532, 1441794, 4, 65533, 1441794, 4, 65534, 1441794, 4, 1, 1441794, 4, 2, 1441794, 4, 3, 1441794, 3, 4, 655362, 2, 4, 655362, 1, 4, 655362, 65533, 4, 655362, 65532, 4, 655362, 65531, 4, 655362, 65530, 3, 1048578, 65530, 2, 1048578, 65530, 1, 1048578, 65530, 65534, 1048578, 65530, 65533, 1048578, 65530, 65532, 1048578, 65531, 65531, 2, 65532, 65531, 2, 65533, 65531, 2, 65534, 65531, 2, 0, 5, 1441794, 65535, 5, 1048578, 5, 0, 655362, 5, 65535, 2, 0, 65530, 1441794, 65535, 65530, 1048578, 65529, 0, 655362, 65529, 65535, 2, 0, 4, 1441795, 65535, 4, 655363, 4, 0, 1441795, 4, 65535, 3, 0, 65531, 3, 65535, 65531, 1048579, 65530, 65535, 1048579, 65530, 0, 655363, 4, 4, 1441792, 4, 65531, 0, 65530, 65531, 1048576, 65530, 4, 655360, 65534, 4, 655362, 65528, 65535, 2, 65527, 65535, 2, 65528, 0, 655362, 65527, 0, 655362, 65526, 1, 1441794, 65526, 2, 1441794, 65526, 3, 1441794, 65526, 4, 1441794, 65526, 5, 1441794, 65531, 8, 2, 65530, 8, 2, 65529, 8, 2, 65528, 8, 2, 65527, 8, 2, 65526, 6, 1441794, 65526, 65535, 2, 65525, 1, 1048578, 65525, 0, 1048578, 65525, 2, 1048578, 65525, 3, 1048578, 65525, 4, 1048578, 65525, 5, 1048578, 65525, 6, 1048578, 65525, 7, 1048578, 65525, 8, 1048578, 65526, 7, 1441794, 65526, 9, 655362, 65527, 9, 655362, 65528, 9, 655362, 65529, 9, 655362, 65530, 9, 655362, 65531, 9, 655362, 65525, 9, 655360, 65525, 65535, 1048576, 65526, 0, 1441795, 65526, 8, 3, 65535, 65529, 1048578, 65534, 65528, 655362, 65533, 65528, 655362, 65532, 65528, 655362, 65531, 65528, 655362, 65530, 65528, 655362, 65526, 65528, 655362, 65525, 65528, 655362, 65524, 65528, 655362, 65523, 65528, 655362, 65522, 65529, 1441794, 65522, 65530, 1441794, 65522, 65531, 1441794, 65522, 65532, 1441794, 65522, 65533, 1441794, 65522, 65534, 1441794, 65522, 65535, 1441794, 65522, 0, 1441794, 65522, 1, 1441794, 65522, 2, 1441794, 65522, 3, 1441794, 65521, 4, 655362, 65520, 4, 655362, 65519, 4, 655362, 65518, 4, 655362, 65517, 4, 655362, 65516, 4, 655362, 65515, 3, 1048578, 65515, 2, 1048578, 65515, 1, 1048578, 65515, 0, 1048578, 65515, 65535, 1048578, 65515, 65534, 1048578, 65515, 65533, 1048578, 65515, 65532, 1048578, 65515, 65531, 1048578, 65515, 65530, 1048578, 65515, 65529, 1048578, 65515, 65528, 1048578, 65515, 65527, 1048578, 65523, 65527, 2, 65524, 65527, 2, 65525, 65527, 2, 65526, 65527, 2, 65527, 65527, 2, 65534, 65527, 2, 65533, 65527, 2, 65532, 65527, 2, 65531, 65527, 2, 65530, 65527, 2, 65529, 65527, 2, 65528, 65527, 2, 65527, 65528, 655362, 65528, 65528, 655362, 65529, 65528, 655362, 65523, 65526, 655362, 65522, 65526, 655362, 65518, 65526, 655362, 65517, 65526, 655362, 65516, 65527, 1441794, 65517, 65525, 2, 65516, 65525, 2, 65515, 65526, 1048578, 65518, 65525, 2, 65519, 65525, 2, 65520, 65525, 2, 65521, 65525, 2, 65522, 65525, 2, 65523, 65525, 2, 65519, 65526, 655362, 65520, 65526, 655362, 65521, 65526, 655362, 65516, 65528, 1441794, 65516, 65529, 1441794, 65516, 65530, 1441794, 65516, 65531, 1441794, 65516, 65532, 1441794, 65516, 65533, 1441794, 65516, 65534, 1441794, 65516, 65535, 1441794, 65516, 0, 1441794, 65516, 1, 1441794, 65516, 2, 1441794, 65521, 65529, 1048578, 65521, 65530, 1048578, 65521, 65531, 1048578, 65521, 65532, 1048578, 65521, 65533, 1048578, 65521, 65534, 1048578, 65521, 65535, 1048578, 65521, 0, 1048578, 65521, 1, 1048578, 65521, 2, 1048578, 65517, 3, 2, 65518, 3, 2, 65519, 3, 2, 65520, 3, 2, 65522, 65527, 2, 65521, 65528, 1048578, 65521, 3, 1048579, 65516, 3, 3, 65516, 65526, 1441795, 65522, 65528, 1441795, 65515, 65525, 1048576, 65521, 65527, 1048576, 65515, 4, 655360, 65522, 4, 1441792, 0, 65529, 1441794, 0, 65528, 1441794, 65535, 65527, 2, 0, 65527, 0, 65535, 65528, 655363, 65524, 65524, 1048578, 65524, 65523, 1048578, 65525, 65522, 2, 65526, 65522, 2, 65527, 65523, 1441794, 65527, 65524, 1441794, 65524, 65526, 655362, 65525, 65526, 655362, 65526, 65526, 655362, 65527, 65526, 1441792, 65527, 65522, 0, 65524, 65522, 1048576, 65527, 65525, 1441794, 65524, 65525, 1048579, 65525, 65525, 1048577, 65526, 65525, 1048577, 65525, 65524, 1048577, 65526, 65524, 1048577, 65525, 65523, 1048577, 65526, 65523, 1048577, 65534, 8, 1441794, 65533, 7, 2, 65533, 10, 655362, 65532, 10, 655360, 65532, 7, 1048576, 65534, 7, 0, 65534, 10, 1441792, 65532, 9, 655363, 65532, 8, 1048579, 65533, 9, 1048577, 65533, 8, 1048577, 65534, 9, 1441794, 6, 65535, 2, 7, 65535, 2, 8, 65535, 2, 9, 65535, 2, 6, 0, 655362, 7, 0, 655362, 8, 0, 655362, 9, 0, 655362, 10, 1, 1048578, 11, 1, 1441794, 11, 2, 1441794, 11, 3, 1441794, 11, 4, 1441794, 11, 5, 1441794, 12, 6, 2, 13, 6, 2, 14, 6, 2, 14, 7, 655362, 13, 7, 655362, 12, 7, 655362, 10, 2, 1048578, 10, 3, 1048578, 10, 4, 1048578, 10, 5, 1048578, 10, 6, 1048578, 11, 7, 655362, 11, 0, 1441794, 10, 65535, 2, 10, 7, 655360, 11, 65535, 0, 10, 0, 655363, 11, 6, 3, 15, 8, 1048578, 15, 9, 1048578, 15, 5, 1048578, 15, 4, 1048578, 16, 3, 2, 17, 3, 2, 18, 3, 2, 16, 10, 655362, 17, 10, 655362, 18, 10, 655362, 19, 9, 1441794, 19, 8, 1441794, 19, 7, 1441794, 19, 6, 1441794, 19, 5, 1441794, 19, 4, 1441794, 15, 3, 1048576, 19, 3, 0, 19, 10, 1441792, 15, 10, 655360, 15, 7, 655363, 15, 6, 1048579, 16, 4, 1048577, 17, 4, 1048577, 18, 4, 1048577, 18, 5, 1048577, 18, 6, 1048577, 17, 5, 1048577, 16, 5, 1048577, 16, 6, 1048577, 17, 6, 1048577, 16, 7, 1048577, 17, 7, 1048577, 18, 7, 1048577, 18, 8, 1048577, 17, 8, 1048577, 16, 8, 1048577, 16, 9, 1048577, 17, 9, 1048577, 18, 9, 1048577)
 }
 
-[node name="Player" parent="levels/level 1" instance=ExtResource("2_af2gc")]
+[node name="Player" parent="levels/level 1" node_paths=PackedStringArray("collider_info") instance=ExtResource("2_af2gc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.31305)
+collider_info = NodePath("../../../empty_takeable")
 
 [node name="decoration" type="Node" parent="levels/level 1"]
+
+[node name="block" type="Node3D" parent="levels/level 1/decoration"]
+transform = Transform3D(2.34891, 0, 0, 0, 3.3466, 0, 0, 0, 1, 0, 1.5923, 5.97104)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="levels/level 1/decoration/block"]
+mesh = SubResource("BoxMesh_efsli")
+surface_material_override/0 = SubResource("StandardMaterial3D_dtxvn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/decoration/block/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/block/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_u8i3q")
+
+[node name="lamps" type="Node" parent="levels/level 1/decoration"]
+
+[node name="Lamp" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2.428, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp8" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2.428, -7.96706)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp8"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp9" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -13.9374, 2.428, -7.96706)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp9"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp10" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -14.0572, 2.428, 3.79384)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp10"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp11" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -19.8877, 2.428, 3.79384)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp11"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp12" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -19.8877, 2.428, -10.0437)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp12"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp13" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -10.0266, 2.428, -11.565)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp13"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp5" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -9.94384, 2.428, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp6" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -9.94384, 2.428, 8.96544)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp7" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.57582, 2.428, 8.96544)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp2" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 11.0421, 2.428, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp3" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 11.2417, 2.428, 6.84887)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
+
+[node name="Lamp4" parent="levels/level 1/decoration/lamps" instance=ExtResource("3_nn6xh")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 17.5714, 2.428, 6.84887)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="levels/level 1/decoration/lamps/Lamp4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212052, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_range = 0.212735
+
+[node name="SpotLight3D" type="SpotLight3D" parent="levels/level 1/decoration/lamps/Lamp4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.973483, 0.887411, 0.77248, 1)
+light_energy = 2.0
+light_indirect_energy = 0.5
+spot_range = 3.21661
+spot_angle = 52.1501
 
 [node name="Menus" type="CanvasGroup" parent="levels"]
 process_mode = 2
@@ -55,4 +364,41 @@ game_manager = NodePath("../../../../gameManager")
 script = ExtResource("7_cmkc4")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_s3jcp")
+environment = SubResource("Environment_mrsqv")
+
+[node name="empty_takeable" type="StaticBody3D" parent="."]
+transform = Transform3D(-1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0, 0.25, -8.05933, 0.525024, 8.39303)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("6_4b1ey")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="empty_takeable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120244, 1.6276, -0.0542145)
+shape = SubResource("BoxShape3D_bfvah")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="empty_takeable"]
+
+[node name="Label" type="Label" parent="empty_takeable/CanvasGroup"]
+offset_left = 585.0
+offset_top = 298.0
+offset_right = 688.0
+offset_bottom = 321.0
+
+[node name="doorway" parent="." instance=ExtResource("7_rkrsp")]
+transform = Transform3D(-1.96701e-08, 0, 0.45, 0, 0.45, 0, -0.45, 0, -1.96701e-08, 19.9387, 0.500168, 6.84932)
+
+[node name="door" parent="doorway" instance=ExtResource("8_di26d")]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="doorway/door"]
+libraries = {
+"": SubResource("AnimationLibrary_1eh3k")
+}
+
+[node name="Node3D" type="Node3D" parent="doorway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0301952)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="doorway/Node3D"]
+transform = Transform3D(2.625, 0, -1.33227e-15, 0, 3.116, 0, 2.84217e-14, 0, 0.1, -0.0576286, 1.19111, 0.11857)
+mesh = SubResource("CapsuleMesh_hpyfx")
+surface_material_override/0 = SubResource("StandardMaterial3D_6bar6")
