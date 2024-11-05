@@ -97,12 +97,14 @@ func _physics_process(delta: float) -> void:
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	#Action prompt
-	if raycast.is_colliding():
-		var hit = raycast.get_collider()
-		collider_info = raycast.get_collider()
-		if (hit != null ):
-			if (hit.info !=null):	
-				hit.info.show()
+	#if raycast.is_colliding():
+		#var hit = raycast.get_collider()
+		#if (hit == takeable):
+			#collider_info = raycast.get_collider()
+		#else: pass
+		#if (hit != null ):
+			#if (collider_info.info !=null):	
+				#collider_info.info.show()
 	#else:
 		#if (collider_info.info != null):
 			#collider_info.info.hide()

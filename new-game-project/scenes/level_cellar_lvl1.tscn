@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ciljhucct84cu"]
+[gd_scene load_steps=27 format=3 uid="uid://ciljhucct84cu"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_um21k"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_ipr0e"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b5drf46e3h82n" path="res://Assets/door.glb" id="10_80xiq"]
 [ext_resource type="Script" path="res://scripts/lever_port.gd" id="10_vtodm"]
 [ext_resource type="Script" path="res://scripts/object_manager.gd" id="13_sbs0v"]
+[ext_resource type="AudioStream" uid="uid://cdjv6itataqt" path="res://Assets/audio/justVibin.wav" id="16_t47jo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ty7n6"]
 size = Vector3(0.595337, 3.50201, 1.11914)
@@ -24,6 +25,54 @@ size = Vector3(1.86279, 3.81934, 2.92676)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1jmx5"]
 size = Vector3(9.0321, 1, 12.7843)
+
+[sub_resource type="Animation" id="Animation_7sbs8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../leverPort/lever:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.669927, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../leverPort/lever:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.20523e-08, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../leverPort/lever:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-3.46251e-08, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_limuc"]
 resource_name = "door_open"
@@ -40,20 +89,38 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, -4.54052, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_7sbs8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../leverPort/lever:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.669927, -0.25, 0, 0.25, 0, 0.621337, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../leverPort/lever:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.20523e-08, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../leverPort/lever:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-3.46251e-08, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 5)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1eh3k"]
@@ -66,6 +133,9 @@ _data = {
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82k5v"]
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_23xhl"]
+size = Vector3(2.72925, 4.45386, 2.07617)
 
 [sub_resource type="Environment" id="Environment_s3jcp"]
 fog_light_energy = 0.05
@@ -89,6 +159,7 @@ data = {
 }
 
 [node name="Player" parent="levels/level 1" node_paths=PackedStringArray("collider_info") instance=ExtResource("2_ipr0e")]
+collision_layer = 129
 collider_info = NodePath("../../../empty_takeable")
 
 [node name="decoration" type="Node" parent="levels/level 1"]
@@ -211,7 +282,6 @@ shape = SubResource("BoxShape3D_ty7n6")
 [node name="CanvasGroup" type="CanvasGroup" parent="levels/level 1/decoration/lever/StaticBody3D"]
 
 [node name="Label" type="Label" parent="levels/level 1/decoration/lever/StaticBody3D/CanvasGroup"]
-visible = false
 offset_left = 585.0
 offset_top = 298.0
 offset_right = 688.0
@@ -222,12 +292,9 @@ text = "Pick up Lever
 [node name="leverPort" parent="levels/level 1/decoration" instance=ExtResource("8_4each")]
 transform = Transform3D(-1.09278e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.09278e-08, 6.77672, 0.5, -13.7278)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/decoration/leverPort" node_paths=PackedStringArray("lever_control", "player")]
-collision_layer = 3
-collision_mask = 0
-script = ExtResource("10_vtodm")
-lever_control = NodePath("../../lever/StaticBody3D")
-player = NodePath("../../../Player")
+[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/decoration/leverPort"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/leverPort/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0583496, 1.40967, -0.127441)
@@ -236,14 +303,16 @@ shape = SubResource("BoxShape3D_03m1u")
 [node name="Label" type="Label" parent="levels/level 1/decoration/leverPort/StaticBody3D"]
 offset_right = 40.0
 offset_bottom = 23.0
+text = "Fix Lever"
 
 [node name="lever" parent="levels/level 1/decoration/leverPort" instance=ExtResource("7_6jeie")]
-transform = Transform3D(1, 2.71415e-08, 9.44744e-09, -2.71415e-08, 0.783867, 0.620929, 9.44744e-09, -0.620929, 0.783867, 0, 0, 0)
+transform = Transform3D(1, 2.71415e-08, 9.44741e-09, -2.71415e-08, 0.783867, 0.620929, 9.44744e-09, -0.620929, 0.783867, 0, 0, 0)
 visible = false
 
-[node name="Area3D" type="Area3D" parent="levels/level 1/decoration/leverPort"]
-collision_layer = 4
-collision_mask = 4
+[node name="Area3D" type="Area3D" parent="levels/level 1/decoration/leverPort" node_paths=PackedStringArray("lever_control", "player")]
+script = ExtResource("10_vtodm")
+lever_control = NodePath("../../lever/StaticBody3D")
+player = NodePath("../../../Player")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/leverPort/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68097, 0, 1.26324)
@@ -267,6 +336,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0301952)
 transform = Transform3D(2.625, 0, -1.33227e-15, 0, 3.116, 0, 2.84217e-14, 0, 0.1, -0.0576286, 1.19111, 0.11857)
 mesh = SubResource("CapsuleMesh_njhju")
 surface_material_override/0 = SubResource("StandardMaterial3D_82k5v")
+
+[node name="Area3D" type="Area3D" parent="levels/level 1/decoration/doorway/Node3D"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/doorway/Node3D/Area3D"]
+transform = Transform3D(1, 0, -1.77636e-14, 0, 1, 0, 1.77636e-14, 0, 1, -0.0255089, 2.18099, -0.538086)
+shape = SubResource("BoxShape3D_23xhl")
+disabled = true
 
 [node name="Menus" type="CanvasGroup" parent="levels"]
 process_mode = 2
@@ -319,3 +397,8 @@ offset_left = 585.0
 offset_top = 298.0
 offset_right = 688.0
 offset_bottom = 321.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_t47jo")
+autoplay = true
+bus = &"Music"

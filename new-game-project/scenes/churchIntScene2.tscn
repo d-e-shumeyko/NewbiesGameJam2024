@@ -1,0 +1,223 @@
+[gd_scene load_steps=13 format=3 uid="uid://bhqhyb2fkn316"]
+
+[ext_resource type="MeshLibrary" uid="uid://ckblkg4d70a3" path="res://tilesets/churchIntTileset.tres" id="1_w50kq"]
+[ext_resource type="PackedScene" uid="uid://bbk6pw044sria" path="res://Assets/pew.glb" id="2_srbxu"]
+[ext_resource type="PackedScene" uid="uid://bjdc6mtc6h1aq" path="res://Assets/trapDoorFrame.glb" id="3_jro4i"]
+[ext_resource type="PackedScene" uid="uid://duwfiull4iqwk" path="res://Assets/trapDoor.glb" id="4_cmf3d"]
+[ext_resource type="PackedScene" uid="uid://ckxfpg67lpqhb" path="res://Assets/window.glb" id="5_vx515"]
+[ext_resource type="PackedScene" uid="uid://c4agx2wpdigj2" path="res://Assets/Lamp.glb" id="6_ydnvp"]
+[ext_resource type="PackedScene" uid="uid://c2u0fnhy5ehcu" path="res://Assets/podium.glb" id="7_fhqnv"]
+[ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="8_8pqh0"]
+[ext_resource type="PackedScene" uid="uid://ct75fbr0ip6fv" path="res://characterModels/Npc.blend" id="9_eo0ry"]
+[ext_resource type="Script" path="res://scripts/npc.gd" id="10_ki4us"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7pl7k"]
+size = Vector3(14.9268, 2.70404, 2.27328)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aym35"]
+radius = 1.63069
+height = 11.9892
+
+[node name="world" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_w50kq")
+data = {
+"cells": PackedInt32Array(65535, 0, 2, 65535, 65535, 2, 0, 65535, 2, 0, 0, 2, 65534, 65535, 2, 65534, 0, 2, 1, 0, 2, 1, 65535, 2, 2, 65535, 2, 2, 0, 2, 65533, 0, 2, 65533, 65535, 2, 65532, 65535, 2, 65531, 65535, 2, 65530, 65535, 2, 65529, 65535, 2, 65528, 0, 2, 65528, 65535, 2, 65529, 0, 2, 65530, 0, 2, 65531, 0, 2, 65532, 0, 2, 65528, 1, 2, 65529, 1, 2, 65530, 1, 2, 65531, 1, 2, 65532, 1, 2, 65533, 1, 2, 65534, 1, 2, 65535, 1, 2, 0, 1, 2, 2, 1, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 65535, 2, 2, 65534, 2, 2, 65533, 2, 2, 65532, 2, 2, 65531, 2, 2, 65530, 2, 2, 65529, 2, 2, 65528, 2, 2, 65528, 65534, 2, 65529, 65534, 2, 65530, 65534, 2, 2, 65534, 2, 1, 65534, 2, 0, 65534, 2, 65535, 65534, 2, 65534, 65534, 2, 65533, 65534, 2, 65532, 65534, 2, 65531, 65534, 2, 65528, 65533, 2, 65529, 65533, 2, 65530, 65533, 2, 65531, 65533, 2, 65532, 65533, 2, 65534, 65533, 2, 65535, 65533, 2, 0, 65533, 2, 1, 65533, 2, 2, 65533, 2, 65528, 65532, 2, 65529, 65532, 2, 65530, 65532, 2, 65531, 65532, 2, 65532, 65532, 2, 65533, 65532, 2, 65534, 65532, 2, 65535, 65532, 2, 0, 65532, 2, 1, 65532, 2, 2, 65532, 2, 2, 3, 2, 1, 3, 2, 0, 3, 2, 65535, 3, 2, 65534, 3, 2, 65533, 3, 2, 65532, 3, 2, 65531, 3, 2, 65528, 3, 2, 65529, 3, 2, 65530, 3, 2, 3, 3, 1441794, 3, 2, 1441794, 3, 1, 1441794, 3, 0, 1441794, 3, 65535, 1441794, 3, 65534, 1441794, 3, 65533, 1441794, 3, 65532, 1441794, 65533, 65533, 1441794, 65534, 65531, 1441792, 65533, 65531, 1441792, 65530, 4, 1048576, 65528, 4, 1048576, 65529, 4, 1048576, 65531, 4, 1048576, 65532, 4, 1048576, 65533, 4, 1048576, 65534, 4, 1048576, 65535, 4, 1048576, 0, 4, 1048576, 2, 4, 1048576, 3, 4, 1048576, 1, 4, 1048576, 65528, 65531, 1441792, 65529, 65531, 1441792, 65530, 65531, 1441792, 65531, 65531, 1441792, 65532, 65531, 1441792, 65535, 65531, 1441792, 0, 65531, 1441792, 1, 65531, 1441792, 2, 65531, 1441792, 3, 65531, 1441792, 65527, 65531, 1, 65527, 4, 1048577, 4, 4, 655361, 4, 65531, 1441793, 4, 3, 655360, 4, 2, 655360, 4, 1, 655360, 4, 0, 655360, 4, 65535, 655360, 4, 65534, 655360, 4, 65533, 655360, 4, 65532, 655360, 65527, 3, 0, 65527, 2, 0, 65527, 1, 0, 65527, 65534, 0, 65527, 65533, 0, 65527, 65532, 0)
+}
+
+[node name="decorations" type="Node" parent="."]
+
+[node name="pews" type="Node" parent="decorations"]
+
+[node name="pew" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -0.697266, 1.04761, -3.60438)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="decorations/pews/pew"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew2" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -0.697266, 1.04761, 3.67283)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="decorations/pews/pew2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew2/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew3" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -3.69727, 1.04761, -3.60438)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="decorations/pews/pew3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew4" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -3.69727, 1.04761, 3.67283)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="decorations/pews/pew4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew4/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew5" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -6.69727, 1.04761, -3.60438)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="decorations/pews/pew5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew6" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -6.69727, 1.04761, 3.67283)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="decorations/pews/pew6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew6/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew7" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -9.69727, 1.04761, -3.60438)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="decorations/pews/pew7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew7/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew8" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -9.69727, 1.04761, 3.67283)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="decorations/pews/pew8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew8/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew9" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -12.6973, 1.04761, -3.60438)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="decorations/pews/pew9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew9/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="pew10" parent="decorations/pews" instance=ExtResource("2_srbxu")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -12.6973, 1.04761, 3.67283)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="decorations/pews/pew10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="decorations/pews/pew10/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028923, 1.34409, -0.103908)
+shape = SubResource("BoxShape3D_7pl7k")
+
+[node name="trapdoor" type="Node" parent="decorations"]
+
+[node name="trapDoorFrame" parent="decorations/trapdoor" instance=ExtResource("3_jro4i")]
+transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 7.25176, 1, -7.25253)
+
+[node name="trapDoor" parent="decorations/trapdoor/trapDoorFrame" instance=ExtResource("4_cmf3d")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="windows" type="Node" parent="decorations"]
+
+[node name="window" parent="decorations/windows" instance=ExtResource("5_vx515")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.148, 1.497, -9.99)
+
+[node name="window2" parent="decorations/windows" instance=ExtResource("5_vx515")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.852, 1.49052, -9.99)
+
+[node name="window3" parent="decorations/windows" instance=ExtResource("5_vx515")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.148, 1.497, -9.99)
+
+[node name="window4" parent="decorations/windows" instance=ExtResource("5_vx515")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.148, 1.497, 9.99)
+
+[node name="window5" parent="decorations/windows" instance=ExtResource("5_vx515")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.852, 1.49052, 9.99)
+
+[node name="window6" parent="decorations/windows" instance=ExtResource("5_vx515")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.148, 1.497, 9.99)
+
+[node name="Lamp" parent="decorations" instance=ExtResource("6_ydnvp")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -12, 5.65, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="decorations/Lamp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 1, 0.843137, 1)
+light_energy = 10.081
+light_indirect_energy = 8.385
+spot_range = 13.4612
+spot_angle = 63.4104
+
+[node name="OmniLight3D" type="OmniLight3D" parent="decorations/Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.590191, 0)
+
+[node name="Lamp2" parent="decorations" instance=ExtResource("6_ydnvp")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -8, 5.65, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="decorations/Lamp2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 1, 0.843137, 1)
+light_energy = 10.081
+light_indirect_energy = 8.385
+spot_range = 13.4612
+spot_angle = 63.4104
+
+[node name="OmniLight3D" type="OmniLight3D" parent="decorations/Lamp2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.590191, 0)
+
+[node name="Lamp3" parent="decorations" instance=ExtResource("6_ydnvp")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -4, 5.65, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="decorations/Lamp3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 1, 0.843137, 1)
+light_energy = 10.081
+light_indirect_energy = 8.385
+spot_range = 13.4612
+spot_angle = 63.4104
+
+[node name="OmniLight3D" type="OmniLight3D" parent="decorations/Lamp3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.590191, 0)
+
+[node name="Lamp4" parent="decorations" instance=ExtResource("6_ydnvp")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 5.65, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="decorations/Lamp4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 1, 0.843137, 1)
+light_energy = 10.081
+light_indirect_energy = 8.385
+spot_range = 13.4612
+spot_angle = 63.4104
+
+[node name="OmniLight3D" type="OmniLight3D" parent="decorations/Lamp4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.590191, 0)
+
+[node name="podium" parent="decorations" instance=ExtResource("7_fhqnv")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.455951, 0, 0.4, 0, -1.74846e-08, 3.3745, 1.03679, 0)
+
+[node name="lamps" type="Node" parent="decorations"]
+
+[node name="Player" parent="." instance=ExtResource("8_8pqh0")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -15.1497, 0.608795, 0.243704)
+
+[node name="Npc" parent="." instance=ExtResource("9_eo0ry")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 5.10263, 1, -7.18146)
+script = ExtResource("10_ki4us")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Npc"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Npc/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.44429, 0)
+shape = SubResource("CapsuleShape3D_aym35")

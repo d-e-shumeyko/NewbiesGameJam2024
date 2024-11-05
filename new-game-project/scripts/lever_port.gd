@@ -1,9 +1,9 @@
-extends StaticBody3D
+extends Node3D
 
 @export var lever_control : takeable
 @export var player : playerChara
 @onready var lever = $"../lever"
-@onready var info = $Label
+@onready var info = $"../StaticBody3D/Label"
 @onready var collision = $"../Area3D"
 @onready var animator = $"../../doorway/door/AnimationPlayer"
 var has_lever : bool

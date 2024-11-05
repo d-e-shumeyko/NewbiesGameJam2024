@@ -13,6 +13,21 @@
 [ext_resource type="PackedScene" uid="uid://1234rq8y02ka" path="res://characterModels/dog.blend" id="9_a81hn"]
 [ext_resource type="Script" path="res://scripts/lever.gd" id="10_vxmhh"]
 
+[sub_resource type="Animation" id="Animation_7sbs8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_limuc"]
 resource_name = "door_open"
 length = 5.0
@@ -27,21 +42,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, -4.54052, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_7sbs8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1eh3k"]
@@ -66,6 +66,21 @@ texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lg26s"]
 
+[sub_resource type="Animation" id="Animation_yxodm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(16.9248, 1.5923, -21.5218)]
+}
+
 [sub_resource type="Animation" id="Animation_646wo"]
 resource_name = "secret_door"
 length = 5.0
@@ -80,21 +95,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(16.9248, 1.5923, -21.5218), Vector3(16.9248, 4.75827, -21.5218)]
-}
-
-[sub_resource type="Animation" id="Animation_yxodm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(16.9248, 1.5923, -21.5218)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v8lsn"]
