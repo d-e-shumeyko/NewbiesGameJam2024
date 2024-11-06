@@ -15,6 +15,10 @@ run/main_scene="res://scenes/level_cellar_lvl1.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*res://scripts/GameState.gd"
+
 [display]
 
 window/stretch/mode="viewport"

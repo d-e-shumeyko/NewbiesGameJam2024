@@ -29,6 +29,14 @@ var was_interacted : bool = false :
 		was_interacted = value
 		
 
+#signal takeObject (is_taken : bool)
+#
+#var was_taken : bool = false:
+	#get :
+		#return was_taken
+	#set(value):
+		#was_taken = value
+
 #var is_now_colliding : bool = false:
 	#get:
 		#return is_now_colliding
@@ -42,8 +50,8 @@ var was_interacted : bool = false :
 @onready var body = $charaNo3
 @onready var raycast : RayCast3D = $head/Camera3D/RayCast3D
 
+@export var hit_hit : StaticBody3D
 
-@export var collider_info : takeable
 
 
 func _ready() -> void:
@@ -96,19 +104,17 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
+	
+	
 	#Action prompt
 	#if raycast.is_colliding():
 		#var hit = raycast.get_collider()
-		#if (hit == takeable):
-			#collider_info = raycast.get_collider()
-		#else: pass
-		#if (hit != null ):
-			#if (collider_info.info !=null):	
-				#collider_info.info.show()
-	#else:
-		#if (collider_info.info != null):
-			#collider_info.info.hide()
-			
+		#hit_hit = hit
+		#if(hit != null):
+			#hit.info.show()
+	#else:		
+		#if (hit_hit.info != null):
+			#hit_hit.info.hide()
 			
 	
 			
@@ -119,9 +125,6 @@ func _physics_process(delta: float) -> void:
 		#hit.show_info()
 		#if (!raycast.is_colliding()):
 			#emit_signal("currentlyInteracting", is_now_colliding)
-
-	
-		
 
 	move_and_slide()
 

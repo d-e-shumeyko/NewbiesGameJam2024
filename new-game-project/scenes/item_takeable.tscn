@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bss408g73t6qv"]
+
+[ext_resource type="Script" path="res://scripts/item_takeable.gd" id="1_q6erq"]
+[ext_resource type="PackedScene" uid="uid://mbreaboira3w" path="res://Assets/lever.glb" id="2_1c2rr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4x5fn"]
+size = Vector3(0.814438, 1.59084, 1)
+
+[node name="ItemTakeable" type="RigidBody3D"]
+script = ExtResource("1_q6erq")
+
+[node name="lever" parent="." instance=ExtResource("2_1c2rr")]
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, -0.333951)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0242081, 0.785225, 0)
+shape = SubResource("BoxShape3D_4x5fn")
+
+[connection signal="interacted" from="." to="." method="_on_interacted"]

@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqhxgtq4yx2wo"]
+[gd_scene load_steps=6 format=3 uid="uid://dqhxgtq4yx2wo"]
 
 [ext_resource type="Script" path="res://scripts/playerChara.gd" id="1_8sd86"]
 [ext_resource type="PackedScene" uid="uid://spymn3nqgmfh" path="res://characterModels/charaNo3.blend" id="2_uiwyg"]
+[ext_resource type="PackedScene" uid="uid://bq1s5fgqe7vce" path="res://scenes/InteractRay.tscn" id="3_wnm6p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e4bw5"]
 radius = 0.158006
 height = 1.14445
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8bngy"]
+size = Vector3(1, 1.13074, 1)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_8sd86")
@@ -33,12 +35,37 @@ spot_angle = 16.3747
 
 [node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -1.31134e-07, -1, 0, 3, -4.37114e-08, 0, 0.128618, 0.0322339)
+visible = false
+enabled = false
 collision_mask = 2
+
+[node name="InteractRay" parent="head" instance=ExtResource("3_wnm6p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.873045, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0315, 0)
 shape = SubResource("BoxShape3D_8bngy")
+
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="crosshair" type="TextureRect" parent="ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2

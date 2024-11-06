@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://blkqf2k1v403j"]
+
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="1_ffmbr"]
+[ext_resource type="PackedScene" uid="uid://cw7a7o46j783m" path="res://Assets/leverPort.glb" id="2_m7erp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q6fwo"]
+size = Vector3(0.248016, 1.78757, 1.64685)
+
+[node name="leverPort" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_ffmbr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.629481, 0, 0, 0, 0.237979, 0, 0, 0, 0.26221, 0, 0, 0)
+
+[node name="leverPort" parent="MeshInstance3D" instance=ExtResource("2_m7erp")]
+transform = Transform3D(0.397152, 0, 0, 0, 1.05051, 0, 0, 0, 0.953433, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000930786, 0.896591, 0.0126343)
+shape = SubResource("BoxShape3D_q6fwo")
