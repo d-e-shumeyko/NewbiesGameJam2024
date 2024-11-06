@@ -30,7 +30,6 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="Animation" id="Animation_jlust"]
 resource_name = "OpenDoor"
 length = 5.0
-loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -269,7 +268,7 @@ script = ExtResource("10_lppd8")
 prompt_message = "Repair Lever"
 
 [node name="lever" parent="levels/level 1/decoration/leverPort2" instance=ExtResource("7_6jeie")]
-transform = Transform3D(-5.46392e-09, -9.46379e-09, -0.25, -0.216506, 0.125, 0, 0.125, 0.216506, -1.09278e-08, 0, 0, 0)
+transform = Transform3D(-4.52496e-07, -7.83751e-07, -0.25, -0.216506, 0.124999, 0, 0.124999, 0.216506, -9.04998e-07, 0, 0, 0)
 visible = false
 script = ExtResource("8_6nmwm")
 

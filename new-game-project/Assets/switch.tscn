@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdm4ncdlr35ed"]
+
+[ext_resource type="Script" path="res://scripts/switch1.gd" id="1_ypgpj"]
+[ext_resource type="PackedScene" uid="uid://ior7hngsntx" path="res://Assets/tumbler_base.glb" id="2_trb5d"]
+[ext_resource type="PackedScene" uid="uid://dp0grueu4ot3p" path="res://Assets/tumbler_switch.glb" id="3_mrr5w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vjegq"]
+size = Vector3(0.566589, 0.65918, 0.611252)
+
+[node name="Switch" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.210111, 0)
+script = ExtResource("1_ypgpj")
+
+[node name="tumbler_base" parent="." instance=ExtResource("2_trb5d")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="tumbler_switch" parent="tumbler_base" instance=ExtResource("3_mrr5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000905037, -0.0034554, 0.00165629)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00466919, 0.17041, 0.000801086)
+shape = SubResource("BoxShape3D_vjegq")
+
+[connection signal="interacted" from="." to="." method="_on_interacted"]

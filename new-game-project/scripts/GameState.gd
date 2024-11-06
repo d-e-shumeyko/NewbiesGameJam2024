@@ -2,7 +2,10 @@ extends Node
 
 var state := {
 	"key":0,
-	"doorUnlocked":false 
+	"doorUnlocked":false,
+	"switch1":false, 
+	"switch2":false, 
+	"switch3":false
 }
 
 func get_value(key):

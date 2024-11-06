@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvst213hh7kow"]
+[gd_scene load_steps=6 format=3 uid="uid://bvst213hh7kow"]
 
 [ext_resource type="MeshLibrary" uid="uid://crv8r5hrnh27l" path="res://tilesets/grass_tileset.tres" id="1_853f4"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_im68s"]
 [ext_resource type="PackedScene" uid="uid://dj4sp3o3rud4" path="res://Assets/church.glb" id="3_npudr"]
+[ext_resource type="PackedScene" uid="uid://c0i2nalr8shyv" path="res://Assets/car.glb" id="4_gcl58"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pjfbr"]
 size = Vector3(9.63336, 9.72241, 19.3124)
@@ -10,7 +11,6 @@ size = Vector3(9.63336, 9.72241, 19.3124)
 [node name="Outside" type="Node3D"]
 
 [node name="GridMap" type="GridMap" parent="."]
-visible = false
 mesh_library = ExtResource("1_853f4")
 cell_scale = 2.0
 data = {
@@ -19,7 +19,6 @@ data = {
 
 [node name="Player" parent="." instance=ExtResource("2_im68s")]
 transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, 4.17303, 0.13073, 10.3898)
-visible = false
 
 [node name="church" parent="." instance=ExtResource("3_npudr")]
 transform = Transform3D(1, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.89288, 1, -1.02893)
@@ -29,3 +28,6 @@ transform = Transform3D(1, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.89288, 1, -1.02893)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="church/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0138998, 4.85217, -0.160654)
 shape = SubResource("BoxShape3D_pjfbr")
+
+[node name="car" parent="." instance=ExtResource("4_gcl58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03345, 0.985584, 14.5488)
