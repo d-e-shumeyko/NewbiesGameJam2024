@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvst213hh7kow"]
+[gd_scene load_steps=9 format=3 uid="uid://bvst213hh7kow"]
 
 [ext_resource type="MeshLibrary" uid="uid://crv8r5hrnh27l" path="res://tilesets/grass_tileset.tres" id="1_853f4"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_im68s"]
 [ext_resource type="PackedScene" uid="uid://dj4sp3o3rud4" path="res://Assets/church.glb" id="3_npudr"]
 [ext_resource type="PackedScene" uid="uid://c0i2nalr8shyv" path="res://Assets/car.glb" id="4_gcl58"]
+[ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="5_gf4kp"]
+[ext_resource type="Script" path="res://scripts/transitionO1toCI1.gd" id="6_klms6"]
+[ext_resource type="AudioStream" uid="uid://c86tq6acruw3x" path="res://Assets/audio/kindaCalm.wav" id="7_52hkv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pjfbr"]
 size = Vector3(9.63336, 9.72241, 19.3124)
@@ -21,7 +24,7 @@ data = {
 transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, 4.17303, 0.13073, 10.3898)
 
 [node name="church" parent="." instance=ExtResource("3_npudr")]
-transform = Transform3D(1, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.89288, 1, -1.02893)
+transform = Transform3D(1, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.89288, 1, -7.44653)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="church"]
 
@@ -31,3 +34,12 @@ shape = SubResource("BoxShape3D_pjfbr")
 
 [node name="car" parent="." instance=ExtResource("4_gcl58")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03345, 0.985584, 14.5488)
+
+[node name="Transition" parent="." instance=ExtResource("5_gf4kp")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 4.64451, 1.07, -1.9761)
+script = ExtResource("6_klms6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_52hkv")
+autoplay = true
+bus = &"Music"

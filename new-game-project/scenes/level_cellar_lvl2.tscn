@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://s3f2nni3y2h3"]
+[gd_scene load_steps=27 format=3 uid="uid://s3f2nni3y2h3"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_md7vo"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_af2gc"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/lvl2Door.gd" id="11_vhldf"]
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="13_3i4d6"]
 [ext_resource type="Script" path="res://scripts/transitionLvl2toLvl3.gd" id="14_2poeo"]
+[ext_resource type="AudioStream" uid="uid://cdjv6itataqt" path="res://Assets/audio/justVibin.wav" id="15_n6c04"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_efsli"]
 
@@ -424,3 +425,7 @@ libraries = {
 [node name="Transition" parent="." instance=ExtResource("13_3i4d6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9726, 0.533383, 6.99402)
 script = ExtResource("14_2poeo")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_n6c04")
+autoplay = true
