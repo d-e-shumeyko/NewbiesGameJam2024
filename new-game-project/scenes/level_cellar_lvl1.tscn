@@ -268,7 +268,7 @@ script = ExtResource("10_lppd8")
 prompt_message = "Repair Lever"
 
 [node name="lever" parent="levels/level 1/decoration/leverPort2" instance=ExtResource("7_6jeie")]
-transform = Transform3D(-4.52496e-07, -7.83751e-07, -0.25, -0.216506, 0.124999, 0, 0.124999, 0.216506, -9.04998e-07, 0, 0, 0)
+transform = Transform3D(-4.52495e-07, -7.83749e-07, -0.25, -0.216506, 0.124999, 0, 0.124999, 0.216506, -9.04998e-07, 0, 0, 0)
 visible = false
 script = ExtResource("8_6nmwm")
 

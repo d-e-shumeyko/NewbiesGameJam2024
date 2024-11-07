@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://bhy3cfinerle0"]
+
+[ext_resource type="PackedScene" uid="uid://diump7mt2bn3a" path="res://Assets/breakerBoxPuzzle.glb" id="1_kyhgn"]
+[ext_resource type="PackedScene" uid="uid://dhfmouko1v6xg" path="res://Assets/breakerBoxPuzzleSwitch.glb" id="2_2i204"]
+[ext_resource type="Texture2D" uid="uid://bcbxtbgmy5kn6" path="res://Assets/tileset_stone-brickwall.png" id="3_jg0hv"]
+[ext_resource type="Texture2D" uid="uid://b46107sj2ff8h" path="res://Assets/tileset_stone-brickwall_n.png" id="4_7wt6i"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4fxlm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p582a"]
+albedo_texture = ExtResource("3_jg0hv")
+normal_enabled = true
+normal_texture = ExtResource("4_7wt6i")
+uv1_scale = Vector3(5.22, 5.22, 5.22)
+
+[node name="Lvl3Puzzle" type="Node3D"]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Node"]
+transform = Transform3D(1, 0, 0, 0, 0.999777, 0.0211344, 0, -0.0211344, 0.999777, 0, 3.1019, 4.58946)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Node/Camera3D"]
+light_energy = 4.471
+light_indirect_energy = 10.058
+spot_range = 7.58652
+spot_angle = 79.318
+
+[node name="breakerBoxPuzzle" parent="Node" instance=ExtResource("1_kyhgn")]
+
+[node name="breakerBoxPuzzleSwitch" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
+
+[node name="breakerBoxPuzzleSwitch2" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34468, 0, 0)
+
+[node name="breakerBoxPuzzleSwitch3" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42851, 0)
+
+[node name="breakerBoxPuzzleSwitch4" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34468, 1.42851, 0)
+
+[node name="breakerBoxPuzzleSwitch5" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84664, 0)
+
+[node name="breakerBoxPuzzleSwitch6" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34468, 2.84664, 0)
+
+[node name="breakerBoxPuzzleSwitch7" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.27515, 0)
+
+[node name="breakerBoxPuzzleSwitch8" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34468, 4.27515, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/breakerBoxPuzzle"]
+transform = Transform3D(8.455, 0, 0, 0, -3.6958e-07, -8.455, 0, 8.455, -3.6958e-07, 0, 2.74823, -1.01611)
+mesh = SubResource("PlaneMesh_4fxlm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_p582a")

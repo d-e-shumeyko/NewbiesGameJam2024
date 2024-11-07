@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1o18p1jbmyoc"]
 
 [ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_n0hha"]
-[ext_resource type="AudioStream" uid="uid://c86tq6acruw3x" path="res://Assets/audio/kindaCalm.wav" id="2_gxmyw"]
+[ext_resource type="AudioStream" uid="uid://dymkj5oxhkxg3" path="res://Assets/audio/kindaCalmAU.wav" id="2_cbcy4"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -43,7 +43,7 @@ layout_mode = 2
 text = "QUIT"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/QUIT"]
-stream = ExtResource("2_gxmyw")
+stream = ExtResource("2_cbcy4")
 autoplay = true
 bus = &"Music"
 

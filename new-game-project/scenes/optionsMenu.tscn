@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_3tlff"]
 [ext_resource type="Script" path="res://scripts/volume.gd" id="2_imgof"]
-[ext_resource type="AudioStream" uid="uid://c86tq6acruw3x" path="res://Assets/audio/kindaCalm.wav" id="3_ab4hn"]
+[ext_resource type="AudioStream" uid="uid://dymkj5oxhkxg3" path="res://Assets/audio/kindaCalmAU.wav" id="3_41hc6"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -27,9 +27,16 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Options" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "OPTIONS"
+horizontal_alignment = 1
+
+[node name="Master" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Game Volume"
+horizontal_alignment = 1
 
 [node name="master" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
@@ -39,6 +46,11 @@ value = 1.0
 script = ExtResource("2_imgof")
 bus_name = "Master"
 
+[node name="Music" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+horizontal_alignment = 1
+
 [node name="music" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
@@ -46,6 +58,11 @@ step = 0.001
 value = 1.0
 script = ExtResource("2_imgof")
 bus_name = "Music"
+
+[node name="Sfx" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "SFX Volume"
+horizontal_alignment = 1
 
 [node name="sfx" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
@@ -60,7 +77,7 @@ layout_mode = 2
 text = "BACK"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_ab4hn")
+stream = ExtResource("3_41hc6")
 autoplay = true
 bus = &"Music"
 

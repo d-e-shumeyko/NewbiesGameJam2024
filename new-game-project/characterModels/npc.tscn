@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu5tp43vh05mi"]
+
+[ext_resource type="PackedScene" uid="uid://ct75fbr0ip6fv" path="res://characterModels/Npc.blend" id="1_u3ite"]
+
+[node name="Npc" instance=ExtResource("1_u3ite")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0248898, -0.000445251, 0.00191498)
+rotation_edit_mode = 1
+bones/3/rotation = Quaternion(0.000474975, 0.000474975, -2.36153, 0.522475)
+bones/4/rotation = Quaternion(-0.019525, 0.000474975, 4.27148, 0.717475)
+bones/7/position = Vector3(4.39648, 4.56348, 0.000474975)
+bones/7/rotation = Quaternion(-0.024525, -0.00452503, -0.129525, 1.00048)
+bones/8/position = Vector3(-2.19953, 0.710475, -0.079525)
+bones/8/rotation = Quaternion(0.000474975, 0.000474975, -1.34453, 0.200475)
+bones/8/scale = Vector3(1.00048, 1.00048, 1.00048)
+bones/11/rotation = Quaternion(0.000474975, 0.000474975, 0.000474975, 1.02548)
+bones/12/position = Vector3(2.78048, -3.58953, 0.000474975)
+bones/12/rotation = Quaternion(-0.014525, -0.00952503, 1.30748, 0.267475)

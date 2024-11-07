@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dxef4aeg1ywyo"]
+[gd_scene load_steps=32 format=3 uid="uid://dxef4aeg1ywyo"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_c0pkj"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_hm1rq"]
@@ -10,8 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://b46107sj2ff8h" path="res://Assets/tileset_stone-brickwall_n.png" id="7_61w64"]
 [ext_resource type="Script" path="res://GameManager.gd" id="7_cws4j"]
 [ext_resource type="PackedScene" uid="uid://dpcpcfuv7qo8r" path="res://Assets/altar.glb" id="8_a1d04"]
+[ext_resource type="PackedScene" uid="uid://decqu27dn1h5e" path="res://Assets/breakerBox.glb" id="8_xt426"]
+[ext_resource type="Script" path="res://scripts/puzzle_trigger.gd" id="9_a8lav"]
 [ext_resource type="PackedScene" uid="uid://1234rq8y02ka" path="res://characterModels/dog.blend" id="9_a81hn"]
-[ext_resource type="Script" path="res://scripts/lever.gd" id="10_vxmhh"]
+[ext_resource type="AudioStream" uid="uid://no65tl6c7l6w" path="res://Assets/audio/justVibinAU.wav" id="12_w4sf7"]
 
 [sub_resource type="Animation" id="Animation_7sbs8"]
 length = 0.001
@@ -110,6 +112,9 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq0ac"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_cj3w0"]
+size = Vector3(3.34454, 3.79626, 2.08142)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_pgvg4"]
 size = Vector3(5.02751, 2.30835, 2.00203)
 
@@ -117,9 +122,6 @@ size = Vector3(5.02751, 2.30835, 2.00203)
 fog_light_energy = 0.05
 fog_density = 0.5
 fog_sky_affect = 0.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wpl6e"]
-size = Vector3(0.595337, 3.50201, 1.11914)
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -321,6 +323,17 @@ mesh = SubResource("BoxMesh_ftxuc")
 skeleton = NodePath("../StaticBody3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_rq0ac")
 
+[node name="breakerBox" parent="levels/level 1/decoration" instance=ExtResource("8_xt426")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 18.9034, 1.29384, -20.9373)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/decoration/breakerBox"]
+collision_layer = 3
+script = ExtResource("9_a8lav")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/breakerBox/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303406, 1.39813, 0.540703)
+shape = SubResource("BoxShape3D_cj3w0")
+
 [node name="altar" parent="levels/level 1" instance=ExtResource("8_a1d04")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 17.0399, 0.46389, -26.0781)
 
@@ -333,29 +346,10 @@ shape = SubResource("BoxShape3D_pgvg4")
 [node name="dog" parent="levels/level 1" instance=ExtResource("9_a81hn")]
 transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 17.1697, 1.36735, -26.1001)
 
-[node name="Menus" type="CanvasGroup" parent="levels"]
-process_mode = 2
-position = Vector2(94, 60)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="levels/Menus"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 65.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="Label" type="Label" parent="levels/Menus/VBoxContainer" node_paths=PackedStringArray("game_manager")]
-layout_mode = 2
-text = "~Pause~"
-script = ExtResource("6_qnd4a")
-game_manager = NodePath("../../../../gameManager")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="levels"]
+stream = ExtResource("12_w4sf7")
+autoplay = true
+bus = &"Music"
 
 [node name="gameManager" type="Node3D" parent="."]
 script = ExtResource("7_cws4j")
@@ -363,20 +357,33 @@ script = ExtResource("7_cws4j")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3x8ur")
 
-[node name="empty_takeable" type="StaticBody3D" parent="."]
-transform = Transform3D(-1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0, 0.25, -8.05933, 0.525024, 8.39303)
-collision_layer = 2
-collision_mask = 3
-script = ExtResource("10_vxmhh")
+[node name="Menus" type="CanvasGroup" parent="."]
+process_mode = 2
+position = Vector2(577, 325)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="empty_takeable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120244, 1.6276, -0.0542145)
-shape = SubResource("BoxShape3D_wpl6e")
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -11.5
+offset_right = 32.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
 
-[node name="CanvasGroup" type="CanvasGroup" parent="empty_takeable"]
+[node name="Label" type="Label" parent="Menus/VBoxContainer" node_paths=PackedStringArray("game_manager")]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "~Pause~"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_qnd4a")
+game_manager = NodePath("../../../gameManager")
 
-[node name="Label" type="Label" parent="empty_takeable/CanvasGroup"]
-offset_left = 585.0
-offset_top = 298.0
-offset_right = 688.0
-offset_bottom = 321.0
+[connection signal="interacted" from="levels/level 1/decoration/breakerBox/StaticBody3D" to="levels/level 1/decoration/breakerBox/StaticBody3D" method="_on_interacted"]
