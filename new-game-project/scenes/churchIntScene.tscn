@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bd784rhbi4bqx"]
+[gd_scene load_steps=28 format=3 uid="uid://bd784rhbi4bqx"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckblkg4d70a3" path="res://tilesets/churchIntTileset.tres" id="1_81gmw"]
 [ext_resource type="PackedScene" uid="uid://bbk6pw044sria" path="res://Assets/pew.glb" id="2_t88ca"]
@@ -22,6 +22,72 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_7pl7k"]
 size = Vector3(14.9268, 2.70404, 2.27328)
 
+[sub_resource type="Animation" id="Animation_v53wv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("trapDoorFrame/trapDoor:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("trapDoorFrame/trapDoor:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ehssy"]
+resource_name = "open_trapdoor"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("trapDoorFrame/trapDoor:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0), Vector3(0, -1.5708, 2.00713)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("trapDoorFrame/trapDoor:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 2.05265, -2.59904)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2ea5"]
+_data = {
+"RESET": SubResource("Animation_v53wv"),
+"open_trapdoor": SubResource("Animation_ehssy")
+}
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ir4un"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o7odt"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_j6lby"]
 size = Vector3(2.19391, 3.59802, 1.97998)
 
@@ -29,7 +95,7 @@ size = Vector3(2.19391, 3.59802, 1.97998)
 size = Vector3(0.574707, 2.47949, 2.63452)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hhfym"]
-size = Vector3(1, 2.16003, 1)
+size = Vector3(0.964386, 2.16003, 1.07736)
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -145,6 +211,18 @@ transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 7.25176, 1, -7.25
 [node name="trapDoor" parent="level/decorations/trapdoor/trapDoorFrame" instance=ExtResource("4_8pupv")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="level/decorations/trapdoor/trapDoorFrame/trapDoor"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_n2ea5")
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/decorations/trapdoor/trapDoorFrame"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.1, 0)
+mesh = SubResource("PlaneMesh_ir4un")
+skeleton = NodePath("../trapDoor")
+surface_material_override/0 = SubResource("StandardMaterial3D_o7odt")
+
 [node name="windows" type="Node" parent="level/decorations"]
 
 [node name="window" parent="level/decorations/windows" instance=ExtResource("5_u7acs")]
@@ -166,12 +244,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.852, 1.49052, 9.99)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.148, 1.497, 9.99)
 
 [node name="podium" parent="level/decorations" instance=ExtResource("6_2j2d8")]
-transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.455951, 0, 0.4, 0, -1.74846e-08, 3.3745, 1.03679, 0)
+transform = Transform3D(-1.53427e-08, 0, -0.351, 0, 0.4, 0, 0.351, 0, -1.53427e-08, 3.3745, 1.03679, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="level/decorations/podium"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level/decorations/podium/StaticBody3D"]
-transform = Transform3D(0.999976, 0, -3.05533e-13, 0, 1, 0, 3.05533e-13, 0, 0.999976, -0.0450715, 1.61261, 0.0100107)
+transform = Transform3D(1, 0, -3.0554e-13, 0, 1, 0, 3.0554e-13, 0, 1, -0.0450715, 1.61261, 0.0100107)
 shape = SubResource("BoxShape3D_j6lby")
 
 [node name="Lamps" type="Node" parent="level/decorations"]
@@ -254,6 +332,7 @@ collision_mask = 3
 
 [node name="Transition" parent="level" instance=ExtResource("11_cao48")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3351, 0.994505, -7.53524)
+monitoring = false
 script = ExtResource("12_2nywh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="level"]
@@ -261,32 +340,49 @@ stream = ExtResource("13_lvuqj")
 autoplay = true
 bus = &"Music"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="level" node_paths=PackedStringArray("text")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.57371, 1.27644, -2.109)
-collision_layer = 3
-script = ExtResource("16_0ewyc")
-text = NodePath("CanvasGroup/VBoxContainer/Label")
-prompt_message = "talk"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="level/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.580017, 0)
-shape = SubResource("BoxShape3D_hhfym")
-
-[node name="CanvasGroup" type="CanvasGroup" parent="level/StaticBody3D"]
-position = Vector2(561, 438)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="level/StaticBody3D/CanvasGroup"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="level/StaticBody3D/CanvasGroup/VBoxContainer"]
-layout_mode = 2
-text = "textbox"
-
 [node name="Npc2" parent="level" node_paths=PackedStringArray("player") instance=ExtResource("12_ydmdv")]
 transform = Transform3D(-0.045021, 0, 0.143084, 0, 0.15, 0, -0.143084, 0, -0.045021, 5.61224, 0.989435, -2.08895)
 script = ExtResource("10_hnjvw")
 player = NodePath("../Player")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="level/Npc2" node_paths=PackedStringArray("text", "animator", "collider")]
+transform = Transform3D(-2.00074, 0, -6.35866, 0, 6.666, 0, 6.35866, 0, -2.00074, 0.2046, 1.91337, -0.204903)
+collision_layer = 3
+script = ExtResource("16_0ewyc")
+text = NodePath("CanvasGroup/VBoxContainer/Label")
+animator = NodePath("../../decorations/trapdoor/trapDoorFrame/trapDoor/AnimationPlayer")
+collider = NodePath("../../Transition")
+prompt_message = "Talk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="level/Npc2/StaticBody3D"]
+transform = Transform3D(0.999988, 0, 7.31859e-13, 0, 0.999988, 0, -7.31859e-13, 0, 0.999988, 0.0941925, 0.580017, 0.106003)
+shape = SubResource("BoxShape3D_hhfym")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="level/Npc2/StaticBody3D"]
+position = Vector2(561, 438)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="level/Npc2/StaticBody3D/CanvasGroup"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -25.0
+offset_right = 416.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="level/Npc2/StaticBody3D/CanvasGroup/VBoxContainer"]
+custom_minimum_size = Vector2(10.015, 10)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Thank you for coming on such short notice! If you coluld please fix the wiring in the basement. We have a large function tomorrow and the electricity has been on the fritz. The entrance is over there in the corner."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Menus" type="CanvasGroup" parent="."]
 process_mode = 2
@@ -315,3 +411,5 @@ game_manager = NodePath("../../../gameManager")
 [node name="gameManager" type="Node3D" parent="."]
 process_mode = 3
 script = ExtResource("17_2wnqb")
+
+[connection signal="interacted" from="level/Npc2/StaticBody3D" to="level/Npc2/StaticBody3D" method="_on_interacted"]

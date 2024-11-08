@@ -113,8 +113,9 @@ _data = {
 }
 
 [sub_resource type="Environment" id="Environment_s3jcp"]
-fog_light_energy = 0.05
-fog_density = 0.5
+fog_enabled = true
+fog_light_energy = 0.04
+fog_density = 0.4
 fog_sky_affect = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ty7n6"]
