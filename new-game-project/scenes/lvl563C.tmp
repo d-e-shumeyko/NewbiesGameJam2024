@@ -41,12 +41,11 @@ spot_angle = 79.318
 [node name="breakerBoxPuzzle" parent="Node" instance=ExtResource("1_kyhgn")]
 script = ExtResource("2_vvfy3")
 
-[node name="breakerBoxPuzzleSwitch" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
+[node name="breakerBoxPuzzleSwitch" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera") instance=ExtResource("2_2i204")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.554241, 0.861586, 0)
 script = ExtResource("4_a23x0")
 switch = NodePath(".")
 camera = NodePath("../../Camera3D")
-manager = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch"]
 
@@ -54,17 +53,17 @@ manager = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131577, 0, -0.159302)
 shape = SubResource("BoxShape3D_ektxx")
 
-[node name="breakerBoxPuzzleSwitch2" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch") instance=ExtResource("2_2i204")]
+[node name="breakerBoxPuzzleSwitch2" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera") instance=ExtResource("2_2i204")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.802, 0.868, 0)
 script = ExtResource("6_8gdji")
 switch = NodePath(".")
+camera = NodePath("../../Camera3D")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2"]
 
-[node name="col1" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131577, 0, -0.159302)
 shape = SubResource("BoxShape3D_5s861")
-metadata/col1 = &"2"
 
 [node name="breakerBoxPuzzleSwitch3" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54302, 2.31254, 0)
@@ -109,6 +108,3 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BACK"
-
-[connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch" method="_on_static_body_3d_input_event"]
-[connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2" method="_on_static_body_3d_input_event"]

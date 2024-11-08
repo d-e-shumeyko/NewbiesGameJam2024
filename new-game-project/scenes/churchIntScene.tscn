@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bd784rhbi4bqx"]
+[gd_scene load_steps=23 format=3 uid="uid://bd784rhbi4bqx"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckblkg4d70a3" path="res://tilesets/churchIntTileset.tres" id="1_81gmw"]
 [ext_resource type="PackedScene" uid="uid://bbk6pw044sria" path="res://Assets/pew.glb" id="2_t88ca"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scripts/transitionCI1toLvl1.gd" id="12_2nywh"]
 [ext_resource type="PackedScene" uid="uid://cu5tp43vh05mi" path="res://characterModels/npc.tscn" id="12_ydmdv"]
 [ext_resource type="AudioStream" uid="uid://c86tq6acruw3x" path="res://Assets/audio/kindaCalm.wav" id="13_lvuqj"]
+[ext_resource type="Script" path="res://scripts/dialogue.gd" id="16_0ewyc"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="16_sujre"]
 [ext_resource type="Script" path="res://GameManager.gd" id="17_2wnqb"]
 
@@ -25,10 +26,10 @@ size = Vector3(14.9268, 2.70404, 2.27328)
 size = Vector3(2.19391, 3.59802, 1.97998)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e8ysu"]
+size = Vector3(0.574707, 2.47949, 2.63452)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aym35"]
-radius = 7.65486
-height = 27.3747
+[sub_resource type="BoxShape3D" id="BoxShape3D_hhfym"]
+size = Vector3(1, 2.16003, 1)
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -236,8 +237,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9293, 0.957104, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="level/decorations/door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.14341, 0)
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level/decorations/door/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.212646, -0.739746, 0.320679)
 shape = SubResource("BoxShape3D_e8ysu")
 
 [node name="doorway" parent="level/decorations/door" instance=ExtResource("8_hxqbx")]
@@ -247,6 +250,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 
 [node name="Player" parent="level" instance=ExtResource("7_v8f1b")]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -15.1497, 0.502668, 0.243704)
+collision_mask = 3
 
 [node name="Transition" parent="level" instance=ExtResource("11_cao48")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3351, 0.994505, -7.53524)
@@ -257,15 +261,32 @@ stream = ExtResource("13_lvuqj")
 autoplay = true
 bus = &"Music"
 
-[node name="Npc2" parent="level" instance=ExtResource("12_ydmdv")]
+[node name="StaticBody3D" type="StaticBody3D" parent="level" node_paths=PackedStringArray("text")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.57371, 1.27644, -2.109)
+collision_layer = 3
+script = ExtResource("16_0ewyc")
+text = NodePath("CanvasGroup/VBoxContainer/Label")
+prompt_message = "talk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="level/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.580017, 0)
+shape = SubResource("BoxShape3D_hhfym")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="level/StaticBody3D"]
+position = Vector2(561, 438)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="level/StaticBody3D/CanvasGroup"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="level/StaticBody3D/CanvasGroup/VBoxContainer"]
+layout_mode = 2
+text = "textbox"
+
+[node name="Npc2" parent="level" node_paths=PackedStringArray("player") instance=ExtResource("12_ydmdv")]
 transform = Transform3D(-0.045021, 0, 0.143084, 0, 0.15, 0, -0.143084, 0, -0.045021, 5.61224, 0.989435, -2.08895)
 script = ExtResource("10_hnjvw")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="level/Npc2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="level/Npc2/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.83913, 0)
-shape = SubResource("CapsuleShape3D_aym35")
+player = NodePath("../Player")
 
 [node name="Menus" type="CanvasGroup" parent="."]
 process_mode = 2

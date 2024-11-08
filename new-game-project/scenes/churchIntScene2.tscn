@@ -259,7 +259,7 @@ script = ExtResource("11_wupjx")
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 5.22444, 0.502668, -7.65565)
 
 [node name="Npc2" parent="level" instance=ExtResource("14_8ngaw")]
-transform = Transform3D(-0.045021, 0, 0.143084, 0, 0.15, 0, -0.143084, 0, -0.045021, 21.8956, 0.989435, -2.08895)
+transform = Transform3D(-0.045021, 0, 0.143084, 0, 0.15, 0, -0.143084, 0, -0.045021, 1957.99, 0.989435, -2.08895)
 visible = false
 script = ExtResource("15_rgyw5")
 

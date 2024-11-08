@@ -5,7 +5,8 @@ var state := {
 	"doorUnlocked":false,
 	"switch1":false, 
 	"switch2":false, 
-	"switch3":false
+	"switch3":false,
+	"secretDoor":false
 }
 
 func get_value(key):
