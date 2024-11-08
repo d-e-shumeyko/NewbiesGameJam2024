@@ -1,14 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1hdpa2nq0k47"]
+[gd_scene load_steps=17 format=3 uid="uid://d1hdpa2nq0k47"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_fwd73"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_jv2qd"]
 [ext_resource type="PackedScene" uid="uid://dobgpoeltoib2" path="res://Assets/LAdder.glb" id="3_cf3mb"]
 [ext_resource type="PackedScene" uid="uid://bjdc6mtc6h1aq" path="res://Assets/trapDoorFrame.glb" id="4_i41ky"]
 [ext_resource type="PackedScene" uid="uid://duwfiull4iqwk" path="res://Assets/trapDoor.glb" id="5_ep7mj"]
+[ext_resource type="PackedScene" uid="uid://dpcpcfuv7qo8r" path="res://Assets/altar.glb" id="6_fgulq"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="6_jafdy"]
 [ext_resource type="Script" path="res://GameManager.gd" id="7_tq6b5"]
 [ext_resource type="Script" path="res://scripts/cloud.gd" id="8_1d6de"]
 [ext_resource type="AudioStream" uid="uid://cmjo55yi3lpo1" path="res://Assets/audio/somethingsHappening.wav" id="9_r81xg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rkgf0"]
+size = Vector3(5.02751, 2.30835, 2.00203)
 
 [sub_resource type="Environment" id="Environment_s3jcp"]
 
@@ -54,6 +58,15 @@ transform = Transform3D(-0.3, 2.62268e-08, 0, -2.62268e-08, -0.3, 0, 0, 0, 0.3, 
 
 [node name="trapDoor" parent="levels/level 1/decoration/trapDoorFrame" instance=ExtResource("5_ep7mj")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2.98023e-08, 0.101406, 0)
+
+[node name="altar" parent="levels/level 1/decoration" instance=ExtResource("6_fgulq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.89432, 0.46389, 41.0137)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/decoration/altar"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/altar/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138626, 0.654175, 0.00922394)
+shape = SubResource("BoxShape3D_rkgf0")
 
 [node name="Menus" type="CanvasGroup" parent="levels"]
 process_mode = 2
@@ -113,7 +126,7 @@ data = {
 
 [node name="cloud" type="Node3D" parent="."]
 process_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18166, 0.257795, 43.7378)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18166, 0.257795, 45.1875)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="cloud" node_paths=PackedStringArray("area", "player")]
 motion_mode = 1

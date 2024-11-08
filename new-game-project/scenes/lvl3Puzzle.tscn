@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhy3cfinerle0"]
+[gd_scene load_steps=27 format=3 uid="uid://bhy3cfinerle0"]
 
 [ext_resource type="Script" path="res://scripts/project_ray.gd" id="1_cbb5u"]
 [ext_resource type="PackedScene" uid="uid://diump7mt2bn3a" path="res://Assets/breakerBoxPuzzle.glb" id="1_kyhgn"]
@@ -8,12 +8,36 @@
 [ext_resource type="Texture2D" uid="uid://b46107sj2ff8h" path="res://Assets/tileset_stone-brickwall_n.png" id="4_7wt6i"]
 [ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch1.gd" id="4_a23x0"]
 [ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch2.gd" id="6_8gdji"]
+[ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch3.gd" id="7_acwqp"]
+[ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch4.gd" id="8_krx5k"]
+[ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch5.gd" id="9_s46ke"]
+[ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch6.gd" id="10_r3u1t"]
+[ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch7.gd" id="11_np3b1"]
+[ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch8.gd" id="12_djsuw"]
+[ext_resource type="Texture2D" uid="uid://wax5sfkae17y" path="res://Assets/voltmeter.png" id="15_exit4"]
+[ext_resource type="Texture2D" uid="uid://dnc638vkjmsee" path="res://Assets/Vindicator.png" id="16_grqhx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ektxx"]
 size = Vector3(1.15744, 1, 0.681396)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5s861"]
 size = Vector3(1.15744, 1, 0.681396)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cptvc"]
+size = Vector3(1.22754, 0.559814, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r44hv"]
+size = Vector3(1.21729, 0.559204, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n3q1t"]
+size = Vector3(1.22791, 0.639893, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vg6dt"]
+size = Vector3(1.22217, 0.626465, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_esen4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_66qsq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4fxlm"]
 
@@ -38,8 +62,9 @@ light_indirect_energy = 10.058
 spot_range = 7.58652
 spot_angle = 79.318
 
-[node name="breakerBoxPuzzle" parent="Node" instance=ExtResource("1_kyhgn")]
+[node name="breakerBoxPuzzle" parent="Node" node_paths=PackedStringArray("sprite") instance=ExtResource("1_kyhgn")]
 script = ExtResource("2_vvfy3")
+sprite = NodePath("../Node2D/Sprite2D/Sprite2D")
 
 [node name="breakerBoxPuzzleSwitch" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.554241, 0.861586, 0)
@@ -54,10 +79,12 @@ manager = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131577, 0, -0.159302)
 shape = SubResource("BoxShape3D_ektxx")
 
-[node name="breakerBoxPuzzleSwitch2" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch") instance=ExtResource("2_2i204")]
+[node name="breakerBoxPuzzleSwitch2" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.802, 0.868, 0)
 script = ExtResource("6_8gdji")
 switch = NodePath(".")
+camera = NodePath("../../Camera3D")
+manager = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2"]
 
@@ -66,23 +93,81 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131577, 0, -0.159302)
 shape = SubResource("BoxShape3D_5s861")
 metadata/col1 = &"2"
 
-[node name="breakerBoxPuzzleSwitch3" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54302, 2.31254, 0)
+[node name="breakerBoxPuzzleSwitch3" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.555, 2.289, 0)
+script = ExtResource("7_acwqp")
+switch = NodePath(".")
+camera = NodePath("../../Camera3D")
+manager = NodePath("..")
 
-[node name="breakerBoxPuzzleSwitch4" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80166, 2.31254, 0)
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch3"]
 
-[node name="breakerBoxPuzzleSwitch5" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54302, 3.73067, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11377, -0.00866699, 0)
+shape = SubResource("BoxShape3D_cptvc")
 
-[node name="breakerBoxPuzzleSwitch6" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80166, 3.73067, 0)
+[node name="breakerBoxPuzzleSwitch4" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.797163, 2.28824, 0)
+script = ExtResource("8_krx5k")
+switch = NodePath(".")
+camera = NodePath("../../Camera3D")
+manager = NodePath("..")
 
-[node name="breakerBoxPuzzleSwitch7" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.547917, 5.15918, 0)
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch4"]
 
-[node name="breakerBoxPuzzleSwitch8" parent="Node/breakerBoxPuzzle" instance=ExtResource("2_2i204")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80166, 5.15918, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.119873, -0.00897217, 0)
+shape = SubResource("BoxShape3D_r44hv")
+
+[node name="breakerBoxPuzzleSwitch5" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.553189, 3.71357, 0)
+script = ExtResource("9_s46ke")
+switch = NodePath(".")
+camera = NodePath("../../Camera3D")
+manager = NodePath("..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111145, 0.0115967, 0)
+shape = SubResource("BoxShape3D_n3q1t")
+
+[node name="breakerBoxPuzzleSwitch6" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794033, 3.71033, 0)
+script = ExtResource("10_r3u1t")
+switch = NodePath(".")
+camera = NodePath("../../Camera3D")
+manager = NodePath("..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111084, 0.00463867, 0)
+shape = SubResource("BoxShape3D_vg6dt")
+
+[node name="breakerBoxPuzzleSwitch7" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.553002, 5.1363, 0)
+script = ExtResource("11_np3b1")
+switch = NodePath(".")
+camera = NodePath("../../Camera3D")
+manager = NodePath("..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch7/StaticBody3D"]
+shape = SubResource("BoxShape3D_esen4")
+
+[node name="breakerBoxPuzzleSwitch8" parent="Node/breakerBoxPuzzle" node_paths=PackedStringArray("switch", "camera", "manager") instance=ExtResource("2_2i204")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794033, 5.13757, 0)
+script = ExtResource("12_djsuw")
+switch = NodePath(".")
+camera = NodePath("../../Camera3D")
+manager = NodePath("..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch8/StaticBody3D"]
+shape = SubResource("BoxShape3D_66qsq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node"]
 transform = Transform3D(8.455, 0, 0, 0, -3.6958e-07, -8.455, 0, 8.455, -3.6958e-07, 0, 2.74823, -1.01611)
@@ -105,10 +190,33 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Label" type="Label" parent="Node/CanvasGroup/VBoxContainer"]
+layout_mode = 2
+text = "POWER RESTORED"
+
 [node name="Button" type="Button" parent="Node/CanvasGroup/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BACK"
 
+[node name="Node2D" type="Node2D" parent="Node"]
+position = Vector2(998, 99)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node/Node2D"]
+position = Vector2(-101, 1)
+scale = Vector2(0.288571, 0.288571)
+texture = ExtResource("15_exit4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node/Node2D/Sprite2D"]
+rotation = -1.5708
+texture = ExtResource("16_grqhx")
+
 [connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2" method="_on_static_body_3d_input_event"]
+[connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch3/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch3" method="_on_static_body_3d_input_event"]
+[connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch4/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch4" method="_on_static_body_3d_input_event"]
+[connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch5/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch5" method="_on_static_body_3d_input_event"]
+[connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch6/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch6" method="_on_static_body_3d_input_event"]
+[connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch7/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch7" method="_on_static_body_3d_input_event"]
+[connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch8/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch8" method="_on_static_body_3d_input_event"]
+[connection signal="pressed" from="Node/CanvasGroup/VBoxContainer/Button" to="Node/breakerBoxPuzzle" method="_on_button_pressed"]
