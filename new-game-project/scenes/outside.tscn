@@ -45,7 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0138998, 4.85217, -0.16065
 shape = SubResource("BoxShape3D_pjfbr")
 
 [node name="car" parent="Level" instance=ExtResource("4_gcl58")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03345, 0.985584, 14.5488)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.03345, 0.985584, 14.5488)
 
 [node name="Transition" parent="Level" instance=ExtResource("5_gf4kp")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 4.64451, 1.07, -1.9761)

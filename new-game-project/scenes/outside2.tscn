@@ -4,14 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_o5j2w"]
 [ext_resource type="PackedScene" uid="uid://dj4sp3o3rud4" path="res://Assets/church.glb" id="3_722n2"]
 [ext_resource type="PackedScene" uid="uid://c0i2nalr8shyv" path="res://Assets/car.glb" id="4_jgdl3"]
-[ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="5_pem7y"]
-[ext_resource type="Script" path="res://scripts/transitionO1toCI1.gd" id="6_tknx5"]
+[ext_resource type="Script" path="res://scripts/car.gd" id="5_f6vtf"]
 [ext_resource type="AudioStream" uid="uid://c86tq6acruw3x" path="res://Assets/audio/kindaCalm.wav" id="7_4kwv3"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="8_nmve8"]
 [ext_resource type="Script" path="res://GameManager.gd" id="9_xqxvk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pjfbr"]
 size = Vector3(9.63336, 9.72241, 19.3124)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ygy5"]
+size = Vector3(1.80908, 3.99622, 4.17146)
 
 [node name="Outside" type="Node3D"]
 process_mode = 3
@@ -27,10 +29,11 @@ data = {
 }
 
 [node name="Player" parent="Level" instance=ExtResource("2_o5j2w")]
-transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, 4.17303, 0.13073, 10.3898)
+transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, 4.17303, 0.13073, 0.123099)
+collision_mask = 3
 
 [node name="church" parent="Level" instance=ExtResource("3_722n2")]
-transform = Transform3D(1, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.89288, 1, -7.44653)
+transform = Transform3D(-1, 0, -6.55671e-08, 0, 0.75, 0, 8.74228e-08, 0, -0.75, 4.89288, 1, 9.33935)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/church"]
 
@@ -39,11 +42,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0138998, 4.85217, -0.16065
 shape = SubResource("BoxShape3D_pjfbr")
 
 [node name="car" parent="Level" instance=ExtResource("4_jgdl3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03345, 0.985584, 14.5488)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.03743, 0.985584, -11.7525)
 
-[node name="Transition" parent="Level" instance=ExtResource("5_pem7y")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 4.64451, 1.07, -1.9761)
-script = ExtResource("6_tknx5")
+[node name="Node3D" type="Node3D" parent="Level/car"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/car/Node3D"]
+collision_layer = 3
+script = ExtResource("5_f6vtf")
+prompt_message = "Get in Car"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/car/Node3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.24174, 1.49811, -0.170886)
+shape = SubResource("BoxShape3D_7ygy5")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_4kwv3")
@@ -77,3 +87,5 @@ game_manager = NodePath("../../../gameManager")
 [node name="gameManager" type="Node3D" parent="."]
 process_mode = 3
 script = ExtResource("9_xqxvk")
+
+[connection signal="interacted" from="Level/car/Node3D/StaticBody3D" to="Level/car/Node3D/StaticBody3D" method="_on_interacted"]

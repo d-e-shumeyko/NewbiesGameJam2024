@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bhy3cfinerle0"]
+[gd_scene load_steps=28 format=3 uid="uid://bhy3cfinerle0"]
 
 [ext_resource type="Script" path="res://scripts/project_ray.gd" id="1_cbb5u"]
 [ext_resource type="PackedScene" uid="uid://diump7mt2bn3a" path="res://Assets/breakerBoxPuzzle.glb" id="1_kyhgn"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://scripts/BPBScripts/BPswitch8.gd" id="12_djsuw"]
 [ext_resource type="Texture2D" uid="uid://wax5sfkae17y" path="res://Assets/voltmeter.png" id="15_exit4"]
 [ext_resource type="Texture2D" uid="uid://dnc638vkjmsee" path="res://Assets/Vindicator.png" id="16_grqhx"]
+[ext_resource type="AudioStream" uid="uid://no65tl6c7l6w" path="res://Assets/audio/justVibinAU.wav" id="17_4pg7r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ektxx"]
 size = Vector3(1.15744, 1, 0.681396)
@@ -210,6 +211,10 @@ texture = ExtResource("15_exit4")
 [node name="Sprite2D" type="Sprite2D" parent="Node/Node2D/Sprite2D"]
 rotation = -1.5708
 texture = ExtResource("16_grqhx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("17_4pg7r")
+autoplay = true
 
 [connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2/StaticBody3D" to="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch2" method="_on_static_body_3d_input_event"]

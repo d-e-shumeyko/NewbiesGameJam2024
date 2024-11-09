@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cda0l0285q1cj"]
+[gd_scene load_steps=20 format=3 uid="uid://cda0l0285q1cj"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckblkg4d70a3" path="res://tilesets/churchIntTileset.tres" id="1_jc6bi"]
 [ext_resource type="PackedScene" uid="uid://bbk6pw044sria" path="res://Assets/pew.glb" id="2_veq4s"]
@@ -13,8 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="11_06ptq"]
 [ext_resource type="Script" path="res://scripts/transitionCI2toO2.gd" id="11_wupjx"]
 [ext_resource type="AudioStream" uid="uid://cmjo55yi3lpo1" path="res://Assets/audio/somethingsHappening.wav" id="13_23x1a"]
-[ext_resource type="PackedScene" uid="uid://cu5tp43vh05mi" path="res://characterModels/npc.tscn" id="14_8ngaw"]
-[ext_resource type="Script" path="res://scripts/npc.gd" id="15_rgyw5"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="16_w12pa"]
 [ext_resource type="Script" path="res://GameManager.gd" id="17_44fff"]
 
@@ -28,10 +26,6 @@ size = Vector3(2.19391, 3.59802, 1.97998)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4dga"]
 albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aym35"]
-radius = 7.65486
-height = 27.3747
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -257,17 +251,6 @@ script = ExtResource("11_wupjx")
 
 [node name="Player" parent="level" instance=ExtResource("10_r3nbj")]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 5.22444, 0.502668, -7.65565)
-
-[node name="Npc2" parent="level" instance=ExtResource("14_8ngaw")]
-transform = Transform3D(-0.045021, 0, 0.143084, 0, 0.15, 0, -0.143084, 0, -0.045021, 1957.99, 0.989435, -2.08895)
-visible = false
-script = ExtResource("15_rgyw5")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="level/Npc2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="level/Npc2/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.83913, 0)
-shape = SubResource("CapsuleShape3D_aym35")
 
 [node name="Menus" type="CanvasGroup" parent="."]
 process_mode = 2

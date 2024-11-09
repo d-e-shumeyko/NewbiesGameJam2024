@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://d1hdpa2nq0k47"]
+[gd_scene load_steps=18 format=3 uid="uid://d1hdpa2nq0k47"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_fwd73"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_jv2qd"]
 [ext_resource type="PackedScene" uid="uid://dobgpoeltoib2" path="res://Assets/LAdder.glb" id="3_cf3mb"]
 [ext_resource type="PackedScene" uid="uid://bjdc6mtc6h1aq" path="res://Assets/trapDoorFrame.glb" id="4_i41ky"]
+[ext_resource type="Script" path="res://scripts/ladder.gd" id="4_po7fc"]
 [ext_resource type="PackedScene" uid="uid://duwfiull4iqwk" path="res://Assets/trapDoor.glb" id="5_ep7mj"]
 [ext_resource type="PackedScene" uid="uid://dpcpcfuv7qo8r" path="res://Assets/altar.glb" id="6_fgulq"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="6_jafdy"]
@@ -11,8 +12,8 @@
 [ext_resource type="Script" path="res://scripts/cloud.gd" id="8_1d6de"]
 [ext_resource type="AudioStream" uid="uid://cmjo55yi3lpo1" path="res://Assets/audio/somethingsHappening.wav" id="9_r81xg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rkgf0"]
-size = Vector3(5.02751, 2.30835, 2.00203)
+[sub_resource type="BoxShape3D" id="BoxShape3D_6pyia"]
+size = Vector3(16.9987, 12.8856, 8.33299)
 
 [sub_resource type="Environment" id="Environment_s3jcp"]
 
@@ -26,7 +27,7 @@ radius = 0.061842
 height = 0.123684
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k6swm"]
-size = Vector3(4.13623, 1.58411, 2.34229)
+size = Vector3(7.57471, 3.83035, 2.34229)
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -52,6 +53,13 @@ collision_layer = 81
 
 [node name="LAdder" parent="levels/level 1/decoration" instance=ExtResource("3_cf3mb")]
 transform = Transform3D(0.141302, 0, 0, 0, 0.121854, 0, 0, 0, 0.2, 0.00129604, 0.565867, 8.63141)
+script = ExtResource("4_po7fc")
+
+[node name="Area3D" type="Area3D" parent="levels/level 1/decoration/LAdder"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/LAdder/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16656, 5.66727, 0.104916)
+shape = SubResource("BoxShape3D_6pyia")
 
 [node name="trapDoorFrame" parent="levels/level 1/decoration" instance=ExtResource("4_i41ky")]
 transform = Transform3D(-0.3, 2.62268e-08, 0, -2.62268e-08, -0.3, 0, 0, 0, 0.3, 0.112403, 2.9885, 8.08356)
@@ -61,12 +69,6 @@ transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2.9802
 
 [node name="altar" parent="levels/level 1/decoration" instance=ExtResource("6_fgulq")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.89432, 0.46389, 41.0137)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/decoration/altar"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/altar/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138626, 0.654175, 0.00922394)
-shape = SubResource("BoxShape3D_rkgf0")
 
 [node name="Menus" type="CanvasGroup" parent="levels"]
 process_mode = 2
@@ -131,12 +133,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18166, 0.257795, 45.1875)
 [node name="CharacterBody3D" type="CharacterBody3D" parent="cloud" node_paths=PackedStringArray("area", "player")]
 motion_mode = 1
 script = ExtResource("8_1d6de")
-area = NodePath("../Area3D")
+area = NodePath("Area3D")
 player = NodePath("../../levels/level 1/Player")
 speed = 0.8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="cloud/CharacterBody3D"]
-transform = Transform3D(13, 0, 0, 0, 3, 0, 0, 0, 3, 0.17034, 2.15882, -0.27343)
+transform = Transform3D(17.723, 0, 0, 0, 4.09, 0, 0, 0, 4.09, 0.17034, 2.15882, -0.27343)
 mesh = SubResource("BoxMesh_7clmx")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_tv6po")
@@ -145,12 +147,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tv6po")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.377918, 0)
 shape = SubResource("CapsuleShape3D_f4mhp")
 
-[node name="Area3D" type="Area3D" parent="cloud"]
+[node name="Area3D" type="Area3D" parent="cloud/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.854593, 0)
 collision_mask = 64
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="cloud/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0925293, 0.292053, -0.671143)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cloud/CharacterBody3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.769531, 0.41182, -0.671143)
 shape = SubResource("BoxShape3D_k6swm")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -158,4 +160,5 @@ stream = ExtResource("9_r81xg")
 autoplay = true
 bus = &"Music"
 
-[connection signal="body_entered" from="cloud/Area3D" to="cloud/CharacterBody3D" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="levels/level 1/decoration/LAdder/Area3D" to="levels/level 1/decoration/LAdder" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="cloud/CharacterBody3D/Area3D" to="cloud/CharacterBody3D" method="_on_area_3d_body_entered"]
