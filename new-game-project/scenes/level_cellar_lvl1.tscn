@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ciljhucct84cu"]
+[gd_scene load_steps=31 format=3 uid="uid://ciljhucct84cu"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_um21k"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_ipr0e"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://mbreaboira3w" path="res://Assets/lever.glb" id="7_6jeie"]
 [ext_resource type="Script" path="res://GameManager.gd" id="7_fgnsi"]
 [ext_resource type="Script" path="res://scripts/lever.gd" id="8_6nmwm"]
+[ext_resource type="PackedScene" uid="uid://c7vm7b830md55" path="res://scenes/door_audio.tscn" id="9_q7o3n"]
 [ext_resource type="PackedScene" uid="uid://bagtdoa8vs7ka" path="res://Assets/doorway.glb" id="9_sh2dp"]
 [ext_resource type="PackedScene" uid="uid://b5drf46e3h82n" path="res://Assets/door.glb" id="10_80xiq"]
 [ext_resource type="Script" path="res://scripts/lockable.gd" id="10_lppd8"]
@@ -18,6 +19,9 @@
 [ext_resource type="Script" path="res://scripts/object_manager.gd" id="13_sbs0v"]
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="14_00a0s"]
 [ext_resource type="AudioStream" uid="uid://cdjv6itataqt" path="res://Assets/audio/justVibin.wav" id="16_t47jo"]
+[ext_resource type="Script" path="res://scripts/down_trap_door.gd" id="20_c87cv"]
+[ext_resource type="AudioStream" uid="uid://17tfynggrb76" path="res://Assets/audio/sfx wav/door close.wav" id="21_s4dvh"]
+[ext_resource type="AudioStream" uid="uid://drws13v7mjoeg" path="res://Assets/audio/sfx wav/ladder down.wav" id="22_sewhn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rcino"]
 size = Vector3(2.56482, 5.18359, 0.610596)
@@ -138,6 +142,7 @@ data = {
 }
 
 [node name="Player" parent="levels/level 1" instance=ExtResource("2_ipr0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05803, 8.43678)
 collision_mask = 3
 
 [node name="decoration" type="Node" parent="levels/level 1"]
@@ -263,6 +268,8 @@ transform = Transform3D(2.625, 0, -1.33227e-15, 0, 3.116, 0, 2.84217e-14, 0, 0.1
 mesh = SubResource("CapsuleMesh_njhju")
 surface_material_override/0 = SubResource("StandardMaterial3D_82k5v")
 
+[node name="AudioStreamPlayer3D" parent="levels/level 1/decoration/doorway" instance=ExtResource("9_q7o3n")]
+
 [node name="leverPort2" parent="levels/level 1/decoration" instance=ExtResource("11_8l4ph")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.777, 0.5, -13.728)
 script = ExtResource("10_lppd8")
@@ -340,5 +347,16 @@ offset_bottom = 321.0
 stream = ExtResource("16_t47jo")
 autoplay = true
 bus = &"Music"
+
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("door", "ladder")]
+script = ExtResource("20_c87cv")
+door = NodePath("door")
+ladder = NodePath("ladder")
+
+[node name="door" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("21_s4dvh")
+
+[node name="ladder" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("22_sewhn")
 
 [connection signal="interacted" from="levels/level 1/decoration/leverPort2" to="levels/level 1/decoration/leverPort2" method="_on_interacted"]

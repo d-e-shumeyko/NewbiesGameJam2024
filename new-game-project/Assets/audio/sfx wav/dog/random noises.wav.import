@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ccs7ee1tbi81s"
+path="res://.godot/imported/random noises.wav-c62eac3f6024a0ef7c6cb30efb279a07.sample"
+
+[deps]
+
+source_file="res://Assets/audio/sfx wav/dog/random noises.wav"
+dest_files=["res://.godot/imported/random noises.wav-c62eac3f6024a0ef7c6cb30efb279a07.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

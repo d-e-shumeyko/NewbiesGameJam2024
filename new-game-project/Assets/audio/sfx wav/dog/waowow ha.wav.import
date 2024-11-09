@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dyxrckbyw67bn"
+path="res://.godot/imported/waowow ha.wav-822ff5c5ebb56a4c9fc0c1dcd28156e2.sample"
+
+[deps]
+
+source_file="res://Assets/audio/sfx wav/dog/waowow ha.wav"
+dest_files=["res://.godot/imported/waowow ha.wav-822ff5c5ebb56a4c9fc0c1dcd28156e2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

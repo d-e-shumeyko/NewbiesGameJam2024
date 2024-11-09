@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqhxgtq4yx2wo"]
+[gd_scene load_steps=8 format=3 uid="uid://dqhxgtq4yx2wo"]
 
 [ext_resource type="Script" path="res://scripts/playerChara.gd" id="1_8sd86"]
 [ext_resource type="PackedScene" uid="uid://spymn3nqgmfh" path="res://characterModels/charaNo3.blend" id="2_uiwyg"]
 [ext_resource type="PackedScene" uid="uid://bq1s5fgqe7vce" path="res://scenes/InteractRay.tscn" id="3_wnm6p"]
+[ext_resource type="PackedScene" uid="uid://ce6hkyhx2c43e" path="res://Assets/dog.glb" id="4_coay2"]
+[ext_resource type="Script" path="res://scripts/doglvl4.gd" id="5_h8jry"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e4bw5"]
 radius = 0.158006
@@ -41,6 +43,11 @@ collision_mask = 2
 
 [node name="InteractRay" parent="head" instance=ExtResource("3_wnm6p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="dog" parent="head" instance=ExtResource("4_coay2")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, -7.85336e-09, 0.0439343, 0.0898319, 3.84086e-09, 0.0898319, -0.0439343, 0.250706, -0.189993, -0.380821)
+visible = false
+script = ExtResource("5_h8jry")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 4

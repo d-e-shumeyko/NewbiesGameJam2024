@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dxef4aeg1ywyo"]
+[gd_scene load_steps=35 format=3 uid="uid://dxef4aeg1ywyo"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_c0pkj"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_hm1rq"]
@@ -12,8 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://dpcpcfuv7qo8r" path="res://Assets/altar.glb" id="8_a1d04"]
 [ext_resource type="PackedScene" uid="uid://decqu27dn1h5e" path="res://Assets/breakerBox.glb" id="8_xt426"]
 [ext_resource type="Script" path="res://scripts/puzzle_trigger.gd" id="9_a8lav"]
-[ext_resource type="PackedScene" uid="uid://1234rq8y02ka" path="res://characterModels/dog.blend" id="9_a81hn"]
+[ext_resource type="PackedScene" uid="uid://ce6hkyhx2c43e" path="res://Assets/dog.glb" id="11_0icp1"]
+[ext_resource type="Script" path="res://scripts/dog.gd" id="12_sotm7"]
 [ext_resource type="AudioStream" uid="uid://no65tl6c7l6w" path="res://Assets/audio/justVibinAU.wav" id="12_w4sf7"]
+[ext_resource type="Script" path="res://scripts/dog_sounds.gd" id="13_x2xdr"]
 
 [sub_resource type="Animation" id="Animation_7sbs8"]
 length = 0.001
@@ -118,9 +120,13 @@ size = Vector3(3.34454, 3.79626, 2.08142)
 [sub_resource type="BoxShape3D" id="BoxShape3D_pgvg4"]
 size = Vector3(5.02751, 2.30835, 2.00203)
 
-[sub_resource type="Environment" id="Environment_3x8ur"]
-fog_light_energy = 0.05
-fog_density = 0.5
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8wl6"]
+size = Vector3(8.16205, 8.3269, 6.10645)
+
+[sub_resource type="Environment" id="Environment_tg8ad"]
+fog_enabled = true
+fog_light_energy = 0.04
+fog_density = 0.4
 fog_sky_affect = 0.0
 
 [node name="world" type="Node3D"]
@@ -343,8 +349,27 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 17.0399, 0.46389, -26.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138626, 0.654175, 0.00922394)
 shape = SubResource("BoxShape3D_pgvg4")
 
-[node name="dog" parent="levels/level 1" instance=ExtResource("9_a81hn")]
-transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 17.1697, 1.36735, -26.1001)
+[node name="dog2" parent="levels/level 1/altar" instance=ExtResource("11_0icp1")]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 1.82451, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/altar/dog2"]
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("12_sotm7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/altar/dog2/StaticBody3D"]
+transform = Transform3D(1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -1.5563, 5.8983, -1.00536)
+shape = SubResource("BoxShape3D_a8wl6")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="levels/level 1/altar/dog2" node_paths=PackedStringArray("timer")]
+autoplay = true
+max_distance = 6.5
+script = ExtResource("13_x2xdr")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="levels/level 1/altar/dog2/AudioStreamPlayer3D"]
+autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="levels"]
 stream = ExtResource("12_w4sf7")
@@ -353,9 +378,6 @@ bus = &"Music"
 
 [node name="gameManager" type="Node3D" parent="."]
 script = ExtResource("7_cws4j")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_3x8ur")
 
 [node name="Menus" type="CanvasGroup" parent="."]
 process_mode = 2
@@ -386,4 +408,9 @@ vertical_alignment = 1
 script = ExtResource("6_qnd4a")
 game_manager = NodePath("../../../gameManager")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tg8ad")
+
 [connection signal="interacted" from="levels/level 1/decoration/breakerBox/StaticBody3D" to="levels/level 1/decoration/breakerBox/StaticBody3D" method="_on_interacted"]
+[connection signal="interacted" from="levels/level 1/altar/dog2/StaticBody3D" to="levels/level 1/altar/dog2/StaticBody3D" method="_on_interacted"]
+[connection signal="timeout" from="levels/level 1/altar/dog2/AudioStreamPlayer3D/Timer" to="levels/level 1/altar/dog2/AudioStreamPlayer3D" method="_on_timer_timeout"]

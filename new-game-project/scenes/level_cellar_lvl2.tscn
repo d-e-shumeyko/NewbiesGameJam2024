@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://s3f2nni3y2h3"]
+[gd_scene load_steps=28 format=3 uid="uid://s3f2nni3y2h3"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_md7vo"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_af2gc"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b5drf46e3h82n" path="res://Assets/door.glb" id="8_di26d"]
 [ext_resource type="Script" path="res://scripts/lvl2Door.gd" id="11_vhldf"]
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="13_3i4d6"]
+[ext_resource type="PackedScene" uid="uid://c7vm7b830md55" path="res://scenes/door_audio.tscn" id="13_jws34"]
 [ext_resource type="Script" path="res://scripts/transitionLvl2toLvl3.gd" id="14_2poeo"]
 [ext_resource type="AudioStream" uid="uid://cdjv6itataqt" path="res://Assets/audio/justVibin.wav" id="15_n6c04"]
 
@@ -24,11 +25,6 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_u8i3q"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sklkv"]
-
-[sub_resource type="Environment" id="Environment_mrsqv"]
-fog_light_energy = 0.05
-fog_density = 0.5
-fog_sky_affect = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ixix"]
 size = Vector3(3.0033, 4.87305, 0.768066)
@@ -74,6 +70,12 @@ _data = {
 "RESET": SubResource("Animation_4rm10"),
 "switch_door": SubResource("Animation_62tdb")
 }
+
+[sub_resource type="Environment" id="Environment_xego5"]
+fog_enabled = true
+fog_light_energy = 0.04
+fog_density = 0.4
+fog_sky_affect = 0.0
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -393,9 +395,6 @@ game_manager = NodePath("../../../../gameManager")
 [node name="gameManager" type="Node3D" parent="."]
 script = ExtResource("7_cmkc4")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_mrsqv")
-
 [node name="doorway" parent="." instance=ExtResource("7_rkrsp")]
 transform = Transform3D(-3.41938e-08, 0, 0.45, 0, 0.575417, 0, -0.782264, 0, -1.96701e-08, 19.9387, 0.500168, 6.84932)
 script = ExtResource("11_vhldf")
@@ -408,6 +407,8 @@ transform = Transform3D(1, 0, -1.77636e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="doorway/door/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, -3.55271e-14, 0, 1, -0.106752, 1.93652, 0.115967)
 shape = SubResource("BoxShape3D_6ixix")
+
+[node name="AudioStreamPlayer3D" parent="doorway/door" instance=ExtResource("13_jws34")]
 
 [node name="Node3D" type="Node3D" parent="doorway"]
 transform = Transform3D(1, 0, 1.77636e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 2.91056)
@@ -429,3 +430,6 @@ script = ExtResource("14_2poeo")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_n6c04")
 autoplay = true
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xego5")

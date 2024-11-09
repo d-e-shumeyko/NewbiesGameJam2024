@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cda0l0285q1cj"]
+[gd_scene load_steps=23 format=3 uid="uid://cda0l0285q1cj"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckblkg4d70a3" path="res://tilesets/churchIntTileset.tres" id="1_jc6bi"]
+[ext_resource type="Script" path="res://scripts/activateDog.gd" id="1_jgflg"]
 [ext_resource type="PackedScene" uid="uid://bbk6pw044sria" path="res://Assets/pew.glb" id="2_veq4s"]
 [ext_resource type="PackedScene" uid="uid://bjdc6mtc6h1aq" path="res://Assets/trapDoorFrame.glb" id="3_vsqh3"]
 [ext_resource type="PackedScene" uid="uid://duwfiull4iqwk" path="res://Assets/trapDoor.glb" id="4_wtkut"]
@@ -19,6 +20,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_7pl7k"]
 size = Vector3(14.9268, 2.70404, 2.27328)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvglx"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lnlrx"]
+material = SubResource("StandardMaterial3D_tvglx")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_j6lby"]
 size = Vector3(2.19391, 3.59802, 1.97998)
 
@@ -27,8 +34,10 @@ size = Vector3(2.19391, 3.59802, 1.97998)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4dga"]
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="world" type="Node3D"]
+[node name="world" type="Node3D" node_paths=PackedStringArray("player")]
 process_mode = 3
+script = ExtResource("1_jgflg")
+player = NodePath("level/Player")
 
 [node name="level" type="Node" parent="."]
 process_mode = 1
@@ -139,7 +148,11 @@ shape = SubResource("BoxShape3D_7pl7k")
 transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 7.25176, 1, -7.25253)
 
 [node name="trapDoor" parent="level/decorations/trapdoor/trapDoorFrame" instance=ExtResource("4_wtkut")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0.866025, -0.5, -3.78552e-08, -0.5, -0.866025, 2.18557e-08, 0, 1.89, -2.775)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/decorations/trapdoor/trapDoorFrame"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.1, 0)
+mesh = SubResource("PlaneMesh_lnlrx")
 
 [node name="windows" type="Node" parent="level/decorations"]
 

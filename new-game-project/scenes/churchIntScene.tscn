@@ -1,10 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://bd784rhbi4bqx"]
+[gd_scene load_steps=31 format=3 uid="uid://bd784rhbi4bqx"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckblkg4d70a3" path="res://tilesets/churchIntTileset.tres" id="1_81gmw"]
 [ext_resource type="PackedScene" uid="uid://bbk6pw044sria" path="res://Assets/pew.glb" id="2_t88ca"]
 [ext_resource type="PackedScene" uid="uid://bjdc6mtc6h1aq" path="res://Assets/trapDoorFrame.glb" id="3_2cd28"]
 [ext_resource type="PackedScene" uid="uid://duwfiull4iqwk" path="res://Assets/trapDoor.glb" id="4_8pupv"]
+[ext_resource type="AudioStream" uid="uid://oxu8icogxvd4" path="res://Assets/audio/sfx wav/door open.wav" id="5_twoip"]
 [ext_resource type="PackedScene" uid="uid://ckxfpg67lpqhb" path="res://Assets/window.glb" id="5_u7acs"]
+[ext_resource type="PackedScene" uid="uid://c7vm7b830md55" path="res://scenes/door_audio.tscn" id="5_y6mn3"]
 [ext_resource type="PackedScene" uid="uid://c2u0fnhy5ehcu" path="res://Assets/podium.glb" id="6_2j2d8"]
 [ext_resource type="PackedScene" uid="uid://c4agx2wpdigj2" path="res://Assets/Lamp.glb" id="6_y3e62"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="7_v8f1b"]
@@ -18,6 +20,7 @@
 [ext_resource type="Script" path="res://scripts/dialogue.gd" id="16_0ewyc"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="16_sujre"]
 [ext_resource type="Script" path="res://GameManager.gd" id="17_2wnqb"]
+[ext_resource type="AudioStream" uid="uid://17tfynggrb76" path="res://Assets/audio/sfx wav/door close.wav" id="21_wrko6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7pl7k"]
 size = Vector3(14.9268, 2.70404, 2.27328)
@@ -76,6 +79,21 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 2.05265, -2.59904)]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("trapDoorFrame/trapDoor/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_twoip")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n2ea5"]
 _data = {
@@ -217,11 +235,17 @@ libraries = {
 "": SubResource("AnimationLibrary_n2ea5")
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="level/decorations/trapdoor/trapDoorFrame/trapDoor"]
+bus = &"SFX"
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level/decorations/trapdoor/trapDoorFrame"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.1, 0)
 mesh = SubResource("PlaneMesh_ir4un")
 skeleton = NodePath("../trapDoor")
 surface_material_override/0 = SubResource("StandardMaterial3D_o7odt")
+
+[node name="AudioStreamPlayer3D" parent="level/decorations/trapdoor/trapDoorFrame" instance=ExtResource("5_y6mn3")]
+max_distance = 2.0
 
 [node name="windows" type="Node" parent="level/decorations"]
 
@@ -327,7 +351,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 [node name="door" parent="level/decorations/door/doorway" instance=ExtResource("9_4twp4")]
 
 [node name="Player" parent="level" instance=ExtResource("7_v8f1b")]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -15.1497, 0.502668, 0.243704)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -16.7288, 0.502668, 0.243704)
 collision_mask = 3
 
 [node name="Transition" parent="level" instance=ExtResource("11_cao48")]
@@ -411,5 +435,10 @@ game_manager = NodePath("../../../gameManager")
 [node name="gameManager" type="Node3D" parent="."]
 process_mode = 3
 script = ExtResource("17_2wnqb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_wrko6")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="interacted" from="level/Npc2/StaticBody3D" to="level/Npc2/StaticBody3D" method="_on_interacted"]

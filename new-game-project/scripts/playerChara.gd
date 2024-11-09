@@ -29,26 +29,16 @@ var was_interacted : bool = false :
 		was_interacted = value
 		
 
-#signal takeObject (is_taken : bool)
-#
-#var was_taken : bool = false:
-	#get :
-		#return was_taken
-	#set(value):
-		#was_taken = value
 
-#var is_now_colliding : bool = false:
-	#get:
-		#return is_now_colliding
-	#set(value):
-		#is_now_colliding = value
 	
 	
-
+@onready var dog = $head/dog
 @onready var head = $head
 @onready var camera = $head/Camera3D
 @onready var body = $charaNo3
 @onready var raycast : RayCast3D = $head/Camera3D/RayCast3D
+#@onready var Awalk :  = $walk
+#@onready var Asprint :  = $sprint
 
 @export var hit_hit : StaticBody3D
 
@@ -77,21 +67,25 @@ func _physics_process(delta: float) -> void:
 		speed = SPRINT_SPEED
 	else:
 		speed = WALK_SPEED
-		
+	
 		# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VEL
-		# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+		# Get input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("Left", "Right", "Up", "Down")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	if is_on_floor():	
 		if direction:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
+			
+			#if Input.is_action_pressed("Sprint"):
+				
 		else:
 			velocity.x = 0.0
 			velocity.z = 0.0
+			
 	else:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)	
@@ -104,28 +98,8 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
-	
-	
-	#Action prompt
-	#if raycast.is_colliding():
-		#var hit = raycast.get_collider()
-		#hit_hit = hit
-		#if(hit != null):
-			#hit.info.show()
-	#else:		
-		#if (hit_hit.info != null):
-			#hit_hit.info.hide()
-			
-	
-			
-			
-			
-				
-		#print(hit.name)
-		#hit.show_info()
-		#if (!raycast.is_colliding()):
-			#emit_signal("currentlyInteracting", is_now_colliding)
 
+	#player_walking()
 	move_and_slide()
 
 func _headbob(time) -> Vector3:
@@ -140,3 +114,10 @@ func _input(event: InputEvent):
 		was_interacted = true
 		emit_signal("objectInteractedWith", was_interacted)
 		was_interacted = false
+
+
+#func player_walking():
+	#if (Input.is_action_pressed("Up") or Input.is_action_pressed("Down") or Input.is_action_pressed("Left") or Input.is_action_pressed("Right")):
+		#Awalk.playing = true
+	#else :
+		#Awalk.playing = false

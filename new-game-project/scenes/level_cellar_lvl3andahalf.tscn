@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://lrluyophv4uo"]
+[gd_scene load_steps=28 format=3 uid="uid://lrluyophv4uo"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_y6jrk"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_wk58a"]
@@ -6,10 +6,12 @@
 [ext_resource type="Script" path="res://scripts/block_brick.gd" id="4_fjljb"]
 [ext_resource type="Texture2D" uid="uid://bcbxtbgmy5kn6" path="res://Assets/tileset_stone-brickwall.png" id="6_sa7ke"]
 [ext_resource type="Texture2D" uid="uid://b46107sj2ff8h" path="res://Assets/tileset_stone-brickwall_n.png" id="7_hrmfl"]
+[ext_resource type="AudioStream" uid="uid://c5om10a57i4ty" path="res://Assets/audio/sfx wav/stone on stone.wav" id="7_ynxbh"]
 [ext_resource type="PackedScene" uid="uid://decqu27dn1h5e" path="res://Assets/breakerBox.glb" id="8_u8er0"]
+[ext_resource type="PackedScene" uid="uid://ce6hkyhx2c43e" path="res://Assets/dog.glb" id="9_jvyj5"]
 [ext_resource type="Script" path="res://scripts/dog.gd" id="10_8x4g7"]
 [ext_resource type="PackedScene" uid="uid://dpcpcfuv7qo8r" path="res://Assets/altar.glb" id="10_d2eg4"]
-[ext_resource type="PackedScene" uid="uid://1234rq8y02ka" path="res://characterModels/dog.blend" id="11_x26hl"]
+[ext_resource type="Script" path="res://scripts/dog_sounds.gd" id="11_f8m28"]
 [ext_resource type="AudioStream" uid="uid://no65tl6c7l6w" path="res://Assets/audio/justVibinAU.wav" id="12_wu7tm"]
 [ext_resource type="Script" path="res://GameManager.gd" id="13_cqqep"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="14_yfxxa"]
@@ -69,13 +71,14 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq0ac"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_07m10"]
+size = Vector3(8.16205, 8.3269, 7.85449)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_pgvg4"]
 size = Vector3(5.02751, 2.30835, 2.00203)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_07m10"]
-size = Vector3(8.16205, 8.3269, 6.10645)
-
 [sub_resource type="Environment" id="Environment_3x8ur"]
+fog_enabled = true
 fog_light_energy = 0.05
 fog_density = 0.5
 fog_sky_affect = 0.0
@@ -251,6 +254,11 @@ libraries = {
 }
 autoplay = "secret_door"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="levels/level 1/decoration/block_brick"]
+stream = ExtResource("7_ynxbh")
+volume_db = 5.0
+autoplay = true
+
 [node name="block" type="Node3D" parent="levels/level 1/decoration"]
 transform = Transform3D(2.20691, 0, 0, 0, 2.56906, 0, 0, 0, 1, 0, 1.75555, 5.8927)
 
@@ -267,26 +275,37 @@ surface_material_override/0 = SubResource("StandardMaterial3D_rq0ac")
 [node name="breakerBox" parent="levels/level 1/decoration" instance=ExtResource("8_u8er0")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 18.9034, 1.29384, -20.9373)
 
+[node name="dog2" parent="levels/level 1/decoration" instance=ExtResource("9_jvyj5")]
+transform = Transform3D(0.0707107, 0, 0.0707107, 0, 0.1, 0, -0.0707107, 0, 0.0707107, 17.1699, 1.36573, -25.816)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/decoration/dog2"]
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("10_8x4g7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/decoration/dog2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5563, 5.8983, -0.131348)
+shape = SubResource("BoxShape3D_07m10")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="levels/level 1/decoration/dog2" node_paths=PackedStringArray("timer")]
+autoplay = true
+max_distance = 10.0
+bus = &"SFX"
+script = ExtResource("11_f8m28")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="levels/level 1/decoration/dog2/AudioStreamPlayer3D"]
+autostart = true
+
 [node name="altar" parent="levels/level 1" instance=ExtResource("10_d2eg4")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 17.0399, 0.46389, -26.0781)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 17.04, 0.464, -26)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/altar"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/altar/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138626, 0.654175, 0.00922394)
 shape = SubResource("BoxShape3D_pgvg4")
-
-[node name="dog" parent="levels/level 1" instance=ExtResource("11_x26hl")]
-transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 17.1697, 1.36735, -26.1001)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="levels/level 1/dog"]
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("10_8x4g7")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="levels/level 1/dog/StaticBody3D"]
-transform = Transform3D(1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -1.5563, 5.8983, -1.00536)
-shape = SubResource("BoxShape3D_07m10")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="levels"]
 stream = ExtResource("12_wu7tm")
@@ -328,4 +347,5 @@ vertical_alignment = 1
 script = ExtResource("14_yfxxa")
 game_manager = NodePath("../../../gameManager")
 
-[connection signal="interacted" from="levels/level 1/dog/StaticBody3D" to="levels/level 1/dog/StaticBody3D" method="_on_interacted"]
+[connection signal="interacted" from="levels/level 1/decoration/dog2/StaticBody3D" to="levels/level 1/decoration/dog2/StaticBody3D" method="_on_interacted"]
+[connection signal="timeout" from="levels/level 1/decoration/dog2/AudioStreamPlayer3D/Timer" to="levels/level 1/decoration/dog2/AudioStreamPlayer3D" method="_on_timer_timeout"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://21vy3lcyumgs"
+path="res://.godot/imported/boof.wav-3d81d531da617135f1c9daa84111ef79.sample"
+
+[deps]
+
+source_file="res://Assets/audio/sfx wav/dog/boof.wav"
+dest_files=["res://.godot/imported/boof.wav-3d81d531da617135f1c9daa84111ef79.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://r1d3flodicmi"]
+
+[ext_resource type="PackedScene" uid="uid://8g1pxttpqens" path="res://Assets/outsideTileset.glb" id="1_aekhv"]
+
+[node name="outsideTileset" instance=ExtResource("1_aekhv")]
