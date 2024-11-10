@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://s3f2nni3y2h3"]
+[gd_scene load_steps=30 format=3 uid="uid://s3f2nni3y2h3"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_md7vo"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_af2gc"]
 [ext_resource type="PackedScene" uid="uid://c4agx2wpdigj2" path="res://Assets/Lamp.glb" id="3_nn6xh"]
 [ext_resource type="PackedScene" uid="uid://76vdwqo6dhy2" path="res://scenes/Interactable.tscn" id="4_tbjrr"]
 [ext_resource type="PackedScene" uid="uid://cdm4ncdlr35ed" path="res://Assets/switch.tscn" id="5_mh44y"]
+[ext_resource type="AudioStream" uid="uid://d2vrlnwskq223" path="res://Assets/audio/sfx wav/switch up.wav" id="5_vq5fq"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="6_6baq6"]
 [ext_resource type="Script" path="res://scripts/switch2.gd" id="6_e0i6v"]
 [ext_resource type="Script" path="res://scripts/switch3.gd" id="7_6pfix"]
@@ -15,7 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="13_3i4d6"]
 [ext_resource type="PackedScene" uid="uid://c7vm7b830md55" path="res://scenes/door_audio.tscn" id="13_jws34"]
 [ext_resource type="Script" path="res://scripts/transitionLvl2toLvl3.gd" id="14_2poeo"]
-[ext_resource type="AudioStream" uid="uid://cdjv6itataqt" path="res://Assets/audio/justVibin.wav" id="15_n6c04"]
+[ext_resource type="AudioStream" uid="uid://dn50ffm23fd4f" path="res://Assets/audio/sfx wav/dragging.wav" id="14_c1o8y"]
+[ext_resource type="AudioStream" uid="uid://no65tl6c7l6w" path="res://Assets/audio/justVibinAU.wav" id="17_mv55l"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_efsli"]
 
@@ -48,6 +50,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("door/AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_62tdb"]
 resource_name = "switch_door"
@@ -63,6 +77,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, -5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("door/AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rjkqo"]
@@ -354,6 +380,10 @@ mesh = SubResource("BoxMesh_sklkv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.572588, -0.688089, 0)
 prompt_message = "To Open the Door: 3 tumblers have to be in the on position"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="levels/level 1/decoration/MeshInstance3D/leverPort"]
+stream = ExtResource("5_vq5fq")
+bus = &"SFX"
+
 [node name="Switch1" parent="levels/level 1/decoration" instance=ExtResource("5_mh44y")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.59813, 1.83063, 7.04915)
 collision_layer = 3
@@ -408,7 +438,12 @@ transform = Transform3D(1, 0, -1.77636e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, -3.55271e-14, 0, 1, -0.106752, 1.93652, 0.115967)
 shape = SubResource("BoxShape3D_6ixix")
 
-[node name="AudioStreamPlayer3D" parent="doorway/door" instance=ExtResource("13_jws34")]
+[node name="knocking" parent="doorway/door" instance=ExtResource("13_jws34")]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="doorway/door"]
+stream = ExtResource("14_c1o8y")
+max_distance = 17.0
+bus = &"SFX"
 
 [node name="Node3D" type="Node3D" parent="doorway"]
 transform = Transform3D(1, 0, 1.77636e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 2.91056)
@@ -428,8 +463,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9726, 0.533383, 6.99402)
 script = ExtResource("14_2poeo")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_n6c04")
+stream = ExtResource("17_mv55l")
 autoplay = true
+bus = &"Music"
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xego5")

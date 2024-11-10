@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cda0l0285q1cj"]
+[gd_scene load_steps=29 format=3 uid="uid://cda0l0285q1cj"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckblkg4d70a3" path="res://tilesets/churchIntTileset.tres" id="1_jc6bi"]
 [ext_resource type="Script" path="res://scripts/activateDog.gd" id="1_jgflg"]
@@ -13,8 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="10_r3nbj"]
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="11_06ptq"]
 [ext_resource type="Script" path="res://scripts/transitionCI2toO2.gd" id="11_wupjx"]
-[ext_resource type="AudioStream" uid="uid://cmjo55yi3lpo1" path="res://Assets/audio/somethingsHappening.wav" id="13_23x1a"]
+[ext_resource type="Script" path="res://scripts/up_trap_door.gd" id="13_402ug"]
+[ext_resource type="AudioStream" uid="uid://17tfynggrb76" path="res://Assets/audio/sfx wav/door close.wav" id="14_jc0vw"]
+[ext_resource type="AudioStream" uid="uid://drws13v7mjoeg" path="res://Assets/audio/sfx wav/ladder down.wav" id="15_rtasy"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="16_w12pa"]
+[ext_resource type="AudioStream" uid="uid://cucy517yc0y82" path="res://Assets/audio/somethingsHappeningAU.wav" id="16_x7tgd"]
 [ext_resource type="Script" path="res://GameManager.gd" id="17_44fff"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7pl7k"]
@@ -33,6 +36,67 @@ size = Vector3(2.19391, 3.59802, 1.97998)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4dga"]
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_7v56b"]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("level/decorations/door/Node/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.56667, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("level/decorations/door/Node/door:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.36667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_n3cm6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("level/decorations/door/Node/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("level/decorations/door/Node/door:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wfmmd"]
+_data = {
+"RESET": SubResource("Animation_n3cm6"),
+"fade_in": SubResource("Animation_7v56b")
+}
 
 [node name="world" type="Node3D" node_paths=PackedStringArray("player")]
 process_mode = 3
@@ -180,7 +244,7 @@ transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.455951, 0, 0.4, 0, -1.74846e
 [node name="StaticBody3D" type="StaticBody3D" parent="level/decorations/podium"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level/decorations/podium/StaticBody3D"]
-transform = Transform3D(0.999976, 0, -3.05533e-13, 0, 1, 0, 3.05533e-13, 0, 0.999976, -0.0450715, 1.61261, 0.0100107)
+transform = Transform3D(1, 0, -3.0554e-13, 0, 1, 0, 3.0554e-13, 0, 1, -0.0450715, 1.61261, 0.0100107)
 shape = SubResource("BoxShape3D_j6lby")
 
 [node name="Lamps" type="Node" parent="level/decorations"]
@@ -262,6 +326,32 @@ surface_material_override/0 = SubResource("StandardMaterial3D_a4dga")
 transform = Transform3D(3.115, 0, 0, 0, 3.115, 0, 0, 0, 3.115, -1.29141, -0.0376783, 0)
 script = ExtResource("11_wupjx")
 
+[node name="Node" type="Node" parent="level/decorations/door" node_paths=PackedStringArray("door", "ladder", "animator")]
+script = ExtResource("13_402ug")
+door = NodePath("door")
+ladder = NodePath("ladder")
+animator = NodePath("AnimationPlayer")
+
+[node name="door" type="AudioStreamPlayer" parent="level/decorations/door/Node"]
+stream = ExtResource("14_jc0vw")
+bus = &"SFX"
+
+[node name="ladder" type="AudioStreamPlayer" parent="level/decorations/door/Node"]
+stream = ExtResource("15_rtasy")
+volume_db = 4.372
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="level/decorations/door/Node"]
+root_node = NodePath("../../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_wfmmd")
+}
+
+[node name="ColorRect" type="ColorRect" parent="level/decorations/door/Node"]
+offset_right = 1154.0
+offset_bottom = 652.0
+color = Color(0, 0, 0, 1)
+
 [node name="Player" parent="level" instance=ExtResource("10_r3nbj")]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 5.22444, 0.502668, -7.65565)
 
@@ -294,6 +384,8 @@ process_mode = 3
 script = ExtResource("17_44fff")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_23x1a")
-autoplay = true
+stream = ExtResource("16_x7tgd")
 bus = &"Music"
+
+[connection signal="finished" from="level/decorations/door/Node/ladder" to="level/decorations/door/Node" method="_on_ladder_finished"]
+[connection signal="animation_finished" from="level/decorations/door/Node/AnimationPlayer" to="level/decorations/door/Node" method="_on_animation_player_animation_finished"]

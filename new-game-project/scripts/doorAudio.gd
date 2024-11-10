@@ -33,7 +33,7 @@ func choose_stream():
 	
 	print(random_file)
 func random_time_interval():
-	var time = randi() % 31
+	var time = randi() % 16
 	return time
 	
 	

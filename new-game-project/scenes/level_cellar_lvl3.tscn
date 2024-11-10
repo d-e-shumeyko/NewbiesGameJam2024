@@ -1,10 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://dxef4aeg1ywyo"]
+[gd_scene load_steps=28 format=3 uid="uid://dxef4aeg1ywyo"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_c0pkj"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_hm1rq"]
 [ext_resource type="PackedScene" uid="uid://c4agx2wpdigj2" path="res://Assets/Lamp.glb" id="3_lcc18"]
-[ext_resource type="PackedScene" uid="uid://bagtdoa8vs7ka" path="res://Assets/doorway.glb" id="4_b0uo8"]
-[ext_resource type="PackedScene" uid="uid://b5drf46e3h82n" path="res://Assets/door.glb" id="5_yh811"]
 [ext_resource type="Texture2D" uid="uid://bcbxtbgmy5kn6" path="res://Assets/tileset_stone-brickwall.png" id="6_itnom"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="6_qnd4a"]
 [ext_resource type="Texture2D" uid="uid://b46107sj2ff8h" path="res://Assets/tileset_stone-brickwall_n.png" id="7_61w64"]
@@ -16,48 +14,6 @@
 [ext_resource type="Script" path="res://scripts/dog.gd" id="12_sotm7"]
 [ext_resource type="AudioStream" uid="uid://no65tl6c7l6w" path="res://Assets/audio/justVibinAU.wav" id="12_w4sf7"]
 [ext_resource type="Script" path="res://scripts/dog_sounds.gd" id="13_x2xdr"]
-
-[sub_resource type="Animation" id="Animation_7sbs8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_limuc"]
-resource_name = "door_open"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4.96667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -4.54052, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1eh3k"]
-_data = {
-"RESET": SubResource("Animation_7sbs8"),
-"door_open": SubResource("Animation_limuc")
-}
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_gbxom"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1286"]
-albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rq6fv"]
 
@@ -278,26 +234,6 @@ light_indirect_energy = 0.5
 spot_range = 3.21661
 spot_angle = 52.1501
 
-[node name="doorway" parent="levels/level 1/decoration" instance=ExtResource("4_b0uo8")]
-transform = Transform3D(-1.96701e-08, 0, 0.45, 0, 0.45, 0, -0.45, 0, -1.96701e-08, 8.948, 0.500168, -12.1219)
-visible = false
-
-[node name="door" parent="levels/level 1/decoration/doorway" instance=ExtResource("5_yh811")]
-transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="levels/level 1/decoration/doorway/door"]
-libraries = {
-"": SubResource("AnimationLibrary_1eh3k")
-}
-
-[node name="Node3D" type="Node3D" parent="levels/level 1/decoration/doorway"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0301952)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="levels/level 1/decoration/doorway/Node3D"]
-transform = Transform3D(2.625, 0, -1.33227e-15, 0, 3.116, 0, 2.84217e-14, 0, 0.1, -0.0576286, 1.19111, 0.11857)
-mesh = SubResource("CapsuleMesh_gbxom")
-surface_material_override/0 = SubResource("StandardMaterial3D_j1286")
-
 [node name="block_brick" type="Node3D" parent="levels/level 1/decoration"]
 transform = Transform3D(2.34891, 0, 0, 0, 3.3466, 0, 0, 0, 1, 16.9248, 1.5923, -21.5218)
 
@@ -312,6 +248,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_003xk")
 shape = SubResource("BoxShape3D_lg26s")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="levels/level 1/decoration/block_brick"]
+active = false
 libraries = {
 "": SubResource("AnimationLibrary_v8lsn")
 }
@@ -365,6 +302,7 @@ shape = SubResource("BoxShape3D_a8wl6")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="levels/level 1/altar/dog2" node_paths=PackedStringArray("timer")]
 autoplay = true
 max_distance = 6.5
+bus = &"SFX"
 script = ExtResource("13_x2xdr")
 timer = NodePath("Timer")
 

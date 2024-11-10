@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ciljhucct84cu"]
+[gd_scene load_steps=35 format=3 uid="uid://ciljhucct84cu"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_um21k"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_ipr0e"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://mbreaboira3w" path="res://Assets/lever.glb" id="7_6jeie"]
 [ext_resource type="Script" path="res://GameManager.gd" id="7_fgnsi"]
 [ext_resource type="Script" path="res://scripts/lever.gd" id="8_6nmwm"]
+[ext_resource type="AudioStream" uid="uid://dn50ffm23fd4f" path="res://Assets/audio/sfx wav/dragging.wav" id="9_c4tla"]
 [ext_resource type="PackedScene" uid="uid://c7vm7b830md55" path="res://scenes/door_audio.tscn" id="9_q7o3n"]
 [ext_resource type="PackedScene" uid="uid://bagtdoa8vs7ka" path="res://Assets/doorway.glb" id="9_sh2dp"]
 [ext_resource type="PackedScene" uid="uid://b5drf46e3h82n" path="res://Assets/door.glb" id="10_80xiq"]
@@ -18,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bss408g73t6qv" path="res://scenes/item_takeable.tscn" id="11_decau"]
 [ext_resource type="Script" path="res://scripts/object_manager.gd" id="13_sbs0v"]
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="14_00a0s"]
-[ext_resource type="AudioStream" uid="uid://cdjv6itataqt" path="res://Assets/audio/justVibin.wav" id="16_t47jo"]
+[ext_resource type="AudioStream" uid="uid://no65tl6c7l6w" path="res://Assets/audio/justVibinAU.wav" id="20_5xv63"]
 [ext_resource type="Script" path="res://scripts/down_trap_door.gd" id="20_c87cv"]
 [ext_resource type="AudioStream" uid="uid://17tfynggrb76" path="res://Assets/audio/sfx wav/door close.wav" id="21_s4dvh"]
 [ext_resource type="AudioStream" uid="uid://drws13v7mjoeg" path="res://Assets/audio/sfx wav/ladder down.wav" id="22_sewhn"]
@@ -70,6 +71,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, -1.5708, 1.0472), Vector3(0, -1.5708, -1.0472)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../doorway/Node3D/AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_1wqsq"]
 length = 0.001
@@ -109,11 +122,84 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, -1.5708, -1.0472)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../doorway/Node3D/AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_al68t"]
 _data = {
 "OpenDoor": SubResource("Animation_jlust"),
 "RESET": SubResource("Animation_1wqsq")
+}
+
+[sub_resource type="Animation" id="Animation_7v56b"]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("level/decorations/door/Node/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.56667, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("level/decorations/door/Node/door:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.36667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_n3cm6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("level/decorations/door/Node/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("level/decorations/door/Node/door:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wfmmd"]
+_data = {
+"RESET": SubResource("Animation_n3cm6"),
+"fade_in": SubResource("Animation_7v56b")
 }
 
 [sub_resource type="Environment" id="Environment_s3jcp"]
@@ -268,6 +354,10 @@ transform = Transform3D(2.625, 0, -1.33227e-15, 0, 3.116, 0, 2.84217e-14, 0, 0.1
 mesh = SubResource("CapsuleMesh_njhju")
 surface_material_override/0 = SubResource("StandardMaterial3D_82k5v")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="levels/level 1/decoration/doorway/Node3D"]
+stream = ExtResource("9_c4tla")
+bus = &"SFX"
+
 [node name="AudioStreamPlayer3D" parent="levels/level 1/decoration/doorway" instance=ExtResource("9_q7o3n")]
 
 [node name="leverPort2" parent="levels/level 1/decoration" instance=ExtResource("11_8l4ph")]
@@ -292,6 +382,32 @@ collision_mask = 3
 
 [node name="Transition" parent="levels/level 1/decoration" instance=ExtResource("14_00a0s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.927, 0.533383, -11.9933)
+
+[node name="Node" type="Node" parent="levels/level 1/decoration" node_paths=PackedStringArray("door", "ladder", "animator")]
+script = ExtResource("20_c87cv")
+door = NodePath("door")
+ladder = NodePath("ladder")
+animator = NodePath("AnimationPlayer")
+
+[node name="door" type="AudioStreamPlayer" parent="levels/level 1/decoration/Node"]
+stream = ExtResource("21_s4dvh")
+bus = &"SFX"
+
+[node name="ladder" type="AudioStreamPlayer" parent="levels/level 1/decoration/Node"]
+stream = ExtResource("22_sewhn")
+volume_db = 4.372
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="levels/level 1/decoration/Node"]
+root_node = NodePath("../../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_wfmmd")
+}
+
+[node name="ColorRect" type="ColorRect" parent="levels/level 1/decoration/Node"]
+offset_right = 1154.0
+offset_bottom = 652.0
+color = Color(0, 0, 0, 1)
 
 [node name="Menus" type="CanvasGroup" parent="levels"]
 process_mode = 2
@@ -344,19 +460,9 @@ offset_right = 688.0
 offset_bottom = 321.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_t47jo")
+stream = ExtResource("20_5xv63")
 autoplay = true
 bus = &"Music"
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("door", "ladder")]
-script = ExtResource("20_c87cv")
-door = NodePath("door")
-ladder = NodePath("ladder")
-
-[node name="door" type="AudioStreamPlayer" parent="Node"]
-stream = ExtResource("21_s4dvh")
-
-[node name="ladder" type="AudioStreamPlayer" parent="Node"]
-stream = ExtResource("22_sewhn")
-
 [connection signal="interacted" from="levels/level 1/decoration/leverPort2" to="levels/level 1/decoration/leverPort2" method="_on_interacted"]
+[connection signal="animation_finished" from="levels/level 1/decoration/Node/AnimationPlayer" to="levels/level 1/decoration/Node" method="_on_animation_player_animation_finished"]

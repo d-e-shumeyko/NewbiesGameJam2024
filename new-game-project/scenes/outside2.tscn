@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://drg14usm7tamr"]
+[gd_scene load_steps=15 format=3 uid="uid://drg14usm7tamr"]
 
 [ext_resource type="Script" path="res://scripts/activateDog.gd" id="1_xj481"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_o5j2w"]
@@ -9,6 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://dymkj5oxhkxg3" path="res://Assets/audio/kindaCalmAU.wav" id="6_gjpn5"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="8_nmve8"]
 [ext_resource type="Script" path="res://GameManager.gd" id="9_xqxvk"]
+[ext_resource type="AudioStream" uid="uid://17tfynggrb76" path="res://Assets/audio/sfx wav/door close.wav" id="10_ij1g5"]
+[ext_resource type="Script" path="res://scripts/doorclose.gd" id="11_b83i5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pjfbr"]
 size = Vector3(9.63336, 9.72241, 19.3124)
@@ -102,5 +104,11 @@ script = ExtResource("9_xqxvk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_y4rw3")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ij1g5")
+autoplay = true
+bus = &"SFX"
+script = ExtResource("11_b83i5")
 
 [connection signal="interacted" from="Level/car/Node3D/StaticBody3D" to="Level/car/Node3D/StaticBody3D" method="_on_interacted"]

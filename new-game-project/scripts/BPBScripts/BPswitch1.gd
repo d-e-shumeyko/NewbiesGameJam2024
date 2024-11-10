@@ -13,6 +13,7 @@ signal emit_A (a: int)
 
 func _on_static_body_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if 	Input.is_action_just_pressed("Input"):
+		$"../AudioStreamPlayer".play()
 	
 		if is_in == false:
 			switch.global_rotation.z = deg_to_rad(180)

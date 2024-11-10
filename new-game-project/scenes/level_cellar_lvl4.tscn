@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="6_jafdy"]
 [ext_resource type="Script" path="res://GameManager.gd" id="7_tq6b5"]
 [ext_resource type="Script" path="res://scripts/cloud.gd" id="8_1d6de"]
-[ext_resource type="AudioStream" uid="uid://cmjo55yi3lpo1" path="res://Assets/audio/somethingsHappening.wav" id="9_r81xg"]
 [ext_resource type="AudioStream" uid="uid://clhnesxoghtlc" path="res://Assets/audio/sfx wav/cloudSound.wav" id="11_8f5g1"]
+[ext_resource type="AudioStream" uid="uid://cucy517yc0y82" path="res://Assets/audio/somethingsHappeningAU.wav" id="13_hwgyn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6pyia"]
 size = Vector3(16.9987, 12.8856, 8.33299)
@@ -162,13 +162,17 @@ shape = SubResource("BoxShape3D_k6swm")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="cloud"]
 stream = ExtResource("11_8f5g1")
+attenuation_model = 2
+volume_db = 80.0
 unit_size = 7.0
-autoplay = true
+max_db = 6.0
+stream_paused = true
 max_distance = 7.0
 bus = &"SFX"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_r81xg")
+stream = ExtResource("13_hwgyn")
+volume_db = -5.0
 autoplay = true
 bus = &"Music"
 

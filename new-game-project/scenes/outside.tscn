@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="5_gf4kp"]
 [ext_resource type="Script" path="res://scripts/transitionO1toCI1.gd" id="6_klms6"]
 [ext_resource type="MeshLibrary" uid="uid://cvpwl6i4w3m2h" path="res://tilesets/outside.tres" id="7_3giv1"]
-[ext_resource type="AudioStream" uid="uid://c86tq6acruw3x" path="res://Assets/audio/kindaCalm.wav" id="7_52hkv"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="8_ihix5"]
+[ext_resource type="AudioStream" uid="uid://dymkj5oxhkxg3" path="res://Assets/audio/kindaCalmAU.wav" id="8_uyrbf"]
 [ext_resource type="Script" path="res://GameManager.gd" id="9_fgqrk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pjfbr"]
@@ -69,7 +69,7 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 4.64451, 1.07, -1.9761)
 script = ExtResource("6_klms6")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_52hkv")
+stream = ExtResource("8_uyrbf")
 autoplay = true
 bus = &"Music"
 

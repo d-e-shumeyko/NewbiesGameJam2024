@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bd784rhbi4bqx"]
+[gd_scene load_steps=32 format=3 uid="uid://bd784rhbi4bqx"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckblkg4d70a3" path="res://tilesets/churchIntTileset.tres" id="1_81gmw"]
 [ext_resource type="PackedScene" uid="uid://bbk6pw044sria" path="res://Assets/pew.glb" id="2_t88ca"]
@@ -16,11 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="11_cao48"]
 [ext_resource type="Script" path="res://scripts/transitionCI1toLvl1.gd" id="12_2nywh"]
 [ext_resource type="PackedScene" uid="uid://cu5tp43vh05mi" path="res://characterModels/npc.tscn" id="12_ydmdv"]
-[ext_resource type="AudioStream" uid="uid://c86tq6acruw3x" path="res://Assets/audio/kindaCalm.wav" id="13_lvuqj"]
+[ext_resource type="AudioStream" uid="uid://dymkj5oxhkxg3" path="res://Assets/audio/kindaCalmAU.wav" id="15_fjavd"]
 [ext_resource type="Script" path="res://scripts/dialogue.gd" id="16_0ewyc"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="16_sujre"]
 [ext_resource type="Script" path="res://GameManager.gd" id="17_2wnqb"]
 [ext_resource type="AudioStream" uid="uid://17tfynggrb76" path="res://Assets/audio/sfx wav/door close.wav" id="21_wrko6"]
+[ext_resource type="Script" path="res://scripts/doorclose.gd" id="22_oia83"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7pl7k"]
 size = Vector3(14.9268, 2.70404, 2.27328)
@@ -360,7 +361,7 @@ monitoring = false
 script = ExtResource("12_2nywh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="level"]
-stream = ExtResource("13_lvuqj")
+stream = ExtResource("15_fjavd")
 autoplay = true
 bus = &"Music"
 
@@ -438,7 +439,7 @@ script = ExtResource("17_2wnqb")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("21_wrko6")
-autoplay = true
 bus = &"SFX"
+script = ExtResource("22_oia83")
 
 [connection signal="interacted" from="level/Npc2/StaticBody3D" to="level/Npc2/StaticBody3D" method="_on_interacted"]

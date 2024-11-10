@@ -258,6 +258,7 @@ autoplay = "secret_door"
 stream = ExtResource("7_ynxbh")
 volume_db = 5.0
 autoplay = true
+bus = &"SFX"
 
 [node name="block" type="Node3D" parent="levels/level 1/decoration"]
 transform = Transform3D(2.20691, 0, 0, 0, 2.56906, 0, 0, 0, 1, 0, 1.75555, 5.8927)
