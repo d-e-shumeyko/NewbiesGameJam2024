@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvst213hh7kow"]
+[gd_scene load_steps=15 format=3 uid="uid://bvst213hh7kow"]
 
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_im68s"]
 [ext_resource type="PackedScene" uid="uid://dj4sp3o3rud4" path="res://Assets/church.glb" id="3_npudr"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crimqtt874i67" path="res://scenes/transition.tscn" id="5_gf4kp"]
 [ext_resource type="Script" path="res://scripts/transitionO1toCI1.gd" id="6_klms6"]
 [ext_resource type="MeshLibrary" uid="uid://cvpwl6i4w3m2h" path="res://tilesets/outside.tres" id="7_3giv1"]
+[ext_resource type="Script" path="res://scripts/tutoriel.gd" id="8_ap6yg"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="8_ihix5"]
 [ext_resource type="AudioStream" uid="uid://dymkj5oxhkxg3" path="res://Assets/audio/kindaCalmAU.wav" id="8_uyrbf"]
 [ext_resource type="Script" path="res://GameManager.gd" id="9_fgqrk"]
@@ -51,8 +52,10 @@ transform = Transform3D(1, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.89288, 1, -7.44653)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0138998, 4.85217, -0.160654)
 shape = SubResource("BoxShape3D_pjfbr")
 
-[node name="AudioStreamPlayer3D" parent="Level/church" instance=ExtResource("4_kdgu2")]
+[node name="knocking" parent="Level/church" instance=ExtResource("4_kdgu2")]
 transform = Transform3D(1, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 3.29643, 9.94297)
+volume_db = 6.0
+max_db = 6.0
 max_distance = 3.0
 
 [node name="car" parent="Level" instance=ExtResource("4_gcl58")]
@@ -68,7 +71,151 @@ shape = SubResource("BoxShape3D_tovlq")
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 4.64451, 1.07, -1.9761)
 script = ExtResource("6_klms6")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="Level"]
+script = ExtResource("8_ap6yg")
+
+[node name="ColorRect" type="ColorRect" parent="Level/CanvasGroup"]
+offset_left = 69.0
+offset_top = 219.0
+offset_right = 349.0
+offset_bottom = 451.0
+color = Color(0, 0, 0, 0.815686)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level/CanvasGroup/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Level/CanvasGroup/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "WALK:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "W, A, S, D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Level/CanvasGroup/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LOOK AROUND:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MOUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Level/CanvasGroup/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "INTERACT:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Level/CanvasGroup/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SPRINT:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SHIFT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Level/CanvasGroup/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "JUMP:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SPACE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Level/CanvasGroup/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MENU INTERACT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LMB"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Level/CanvasGroup/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level/CanvasGroup/ColorRect/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ESC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="Level/CanvasGroup"]
+wait_time = 30.0
+autostart = true
+
+[node name="ost" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_uyrbf")
 autoplay = true
 bus = &"Music"
@@ -110,3 +257,5 @@ light_energy = 16.0
 light_volumetric_fog_energy = 0.0
 light_specular = 1.509
 spot_range = 43.0515
+
+[connection signal="timeout" from="Level/CanvasGroup/Timer" to="Level/CanvasGroup" method="_on_timer_timeout"]

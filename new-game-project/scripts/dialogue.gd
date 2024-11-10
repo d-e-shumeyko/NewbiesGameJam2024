@@ -1,6 +1,6 @@
 extends Interactable
 
-@export var text : Label
+@export var text : CanvasGroup
 @export var read : bool = false
 @export var played : bool = false
 @export var animator : AnimationPlayer

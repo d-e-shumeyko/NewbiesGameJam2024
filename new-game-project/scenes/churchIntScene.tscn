@@ -245,7 +245,7 @@ mesh = SubResource("PlaneMesh_ir4un")
 skeleton = NodePath("../trapDoor")
 surface_material_override/0 = SubResource("StandardMaterial3D_o7odt")
 
-[node name="AudioStreamPlayer3D" parent="level/decorations/trapdoor/trapDoorFrame" instance=ExtResource("5_y6mn3")]
+[node name="knocking" parent="level/decorations/trapdoor/trapDoorFrame" instance=ExtResource("5_y6mn3")]
 max_distance = 2.0
 
 [node name="windows" type="Node" parent="level/decorations"]
@@ -360,7 +360,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3351, 0.994505, -7.53524)
 monitoring = false
 script = ExtResource("12_2nywh")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="level"]
+[node name="ost" type="AudioStreamPlayer" parent="level"]
 stream = ExtResource("15_fjavd")
 autoplay = true
 bus = &"Music"
@@ -374,7 +374,7 @@ player = NodePath("../Player")
 transform = Transform3D(-2.00074, 0, -6.35866, 0, 6.666, 0, 6.35866, 0, -2.00074, 0.2046, 1.91337, -0.204903)
 collision_layer = 3
 script = ExtResource("16_0ewyc")
-text = NodePath("CanvasGroup/VBoxContainer/Label")
+text = NodePath("CanvasGroup")
 animator = NodePath("../../decorations/trapdoor/trapDoorFrame/trapDoor/AnimationPlayer")
 collider = NodePath("../../Transition")
 prompt_message = "Talk"
@@ -385,6 +385,13 @@ shape = SubResource("BoxShape3D_hhfym")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="level/Npc2/StaticBody3D"]
 position = Vector2(561, 438)
+
+[node name="ColorRect" type="ColorRect" parent="level/Npc2/StaticBody3D/CanvasGroup"]
+offset_left = -326.0
+offset_top = -30.0
+offset_right = 416.0
+offset_bottom = 54.0
+color = Color(0, 0, 0, 0.788235)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="level/Npc2/StaticBody3D/CanvasGroup"]
 anchors_preset = 14
@@ -437,7 +444,7 @@ game_manager = NodePath("../../../gameManager")
 process_mode = 3
 script = ExtResource("17_2wnqb")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="doorClose" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("21_wrko6")
 bus = &"SFX"
 script = ExtResource("22_oia83")

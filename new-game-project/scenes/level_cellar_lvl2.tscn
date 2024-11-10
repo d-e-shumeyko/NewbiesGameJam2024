@@ -53,7 +53,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("door/AudioStreamPlayer3D:playing")
+tracks/1/path = NodePath("door/doorsound:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -81,7 +81,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("door/AudioStreamPlayer3D:playing")
+tracks/1/path = NodePath("door/doorsound:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -439,8 +439,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, -3.55271e-14, 0, 1, -0.106752, 1.93652
 shape = SubResource("BoxShape3D_6ixix")
 
 [node name="knocking" parent="doorway/door" instance=ExtResource("13_jws34")]
+volume_db = 6.0
+max_db = 6.0
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="doorway/door"]
+[node name="doorsound" type="AudioStreamPlayer3D" parent="doorway/door"]
 stream = ExtResource("14_c1o8y")
 max_distance = 17.0
 bus = &"SFX"
@@ -462,7 +464,7 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9726, 0.533383, 6.99402)
 script = ExtResource("14_2poeo")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ost" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_mv55l")
 autoplay = true
 bus = &"Music"

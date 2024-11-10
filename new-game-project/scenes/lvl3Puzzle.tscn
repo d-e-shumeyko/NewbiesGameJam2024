@@ -171,7 +171,7 @@ manager = NodePath("..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node/breakerBoxPuzzle/breakerBoxPuzzleSwitch8/StaticBody3D"]
 shape = SubResource("BoxShape3D_66qsq")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node/breakerBoxPuzzle"]
+[node name="switchClick" type="AudioStreamPlayer" parent="Node/breakerBoxPuzzle"]
 stream = ExtResource("13_fh0mx")
 bus = &"SFX"
 
@@ -217,7 +217,7 @@ texture = ExtResource("15_exit4")
 rotation = -1.5708
 texture = ExtResource("16_grqhx")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
+[node name="ost" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("17_4pg7r")
 autoplay = true
 bus = &"Music"

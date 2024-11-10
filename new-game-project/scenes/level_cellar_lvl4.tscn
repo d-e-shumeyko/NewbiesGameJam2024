@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d1hdpa2nq0k47"]
+[gd_scene load_steps=21 format=3 uid="uid://d1hdpa2nq0k47"]
 
 [ext_resource type="Script" path="res://scripts/activateDog.gd" id="1_5q2bq"]
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_fwd73"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="6_jafdy"]
 [ext_resource type="Script" path="res://GameManager.gd" id="7_tq6b5"]
 [ext_resource type="Script" path="res://scripts/cloud.gd" id="8_1d6de"]
+[ext_resource type="MeshLibrary" uid="uid://cvpwl6i4w3m2h" path="res://tilesets/outside.tres" id="9_lxtjw"]
 [ext_resource type="AudioStream" uid="uid://clhnesxoghtlc" path="res://Assets/audio/sfx wav/cloudSound.wav" id="11_8f5g1"]
 [ext_resource type="AudioStream" uid="uid://cucy517yc0y82" path="res://Assets/audio/somethingsHappeningAU.wav" id="13_hwgyn"]
 
@@ -27,7 +28,7 @@ radius = 0.061842
 height = 0.123684
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k6swm"]
-size = Vector3(7.57471, 3.83035, 2.34229)
+size = Vector3(3.47486, 3.83035, 1.7699)
 
 [sub_resource type="Environment" id="Environment_43wat"]
 fog_enabled = true
@@ -77,6 +78,16 @@ transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2.9802
 
 [node name="altar" parent="levels/level 1/decoration" instance=ExtResource("6_fgulq")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.89432, 0.46389, 41.0137)
+
+[node name="GridMap2" type="GridMap" parent="levels/level 1"]
+visible = false
+mesh_library = ExtResource("9_lxtjw")
+collision_layer = 16384
+collision_mask = 0
+data = {
+"cells": PackedInt32Array(-2, 31, 1, -2, 26, 1, -2, 21, 1, -2, 16, 1, -2, 11, 1, -2, 6, 1, -2, 1, 1, -2, 65532, 1, -2, 65527, 1, -2, 65522, 1, -7, 31, 1, -7, 26, 1, -7, 21, 1, -7, 16, 1, -7, 11, 1, -7, 6, 1, -7, 1, 1, -7, 65532, 1, -7, 65527, 1, -7, 65522, 1, -12, 65522, 1, -12, 31, 1, -12, 26, 1, -12, 21, 1, -12, 16, 1, -12, 11, 1, -12, 6, 1, -12, 1, 1, -12, 65532, 1, -12, 65527, 1, -65533, 31, 1, -65533, 26, 1, -65533, 21, 1, -65533, 16, 1, -65533, 11, 1, -65533, 6, 1, -65528, 6, 1, -65523, 6, 1, -65518, 6, 1, -65518, 1, 1, -65518, 65532, 1, -65518, 65527, 1, -65518, 65522, 1, -65523, 65522, 1, -65528, 65522, 1, -65533, 65522, 1, -65528, 31, 1, -65523, 31, 1, -65518, 31, 1, -65518, 11, 1, -65518, 16, 1, -65518, 21, 1, -65518, 26, 1, -65528, 26, 1, -65523, 26, 1, -65523, 21, 1, -65523, 16, 1, -65523, 11, 1, -65528, 11, 1, -65528, 16, 1, -65528, 21, 1, -65533, 1, 1, -65528, 1, 1, -65523, 1, 1, -65523, 65532, 1, -65528, 65532, 1, -65533, 65532, 1, -65533, 65527, 1, -65528, 65527, 1, -65523, 65527, 1)
+}
+metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="Menus" type="CanvasGroup" parent="levels"]
 process_mode = 2
@@ -133,14 +144,17 @@ data = {
 
 [node name="cloud" type="Node3D" parent="."]
 process_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18166, 0.257795, 45.1875)
+transform = Transform3D(1.195, 0, 0, 0, 1.195, 0, 0, 0, 1.195, -3.18166, -0.887117, 45.4003)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="cloud" node_paths=PackedStringArray("area", "player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25913, 3.29123)
+collision_layer = 16385
+collision_mask = 16385
 motion_mode = 1
 script = ExtResource("8_1d6de")
 area = NodePath("Area3D")
 player = NodePath("../../levels/level 1/Player")
-speed = 0.8
+speed = 0.9
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="cloud/CharacterBody3D"]
 transform = Transform3D(17.723, 0, 0, 0, 4.09, 0, 0, 0, 4.09, 0.17034, 2.15882, -0.27343)
@@ -149,18 +163,18 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_tv6po")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cloud/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.377918, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.377918, -2.05544)
 shape = SubResource("CapsuleShape3D_f4mhp")
 
 [node name="Area3D" type="Area3D" parent="cloud/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.854593, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42372, -1.88175)
 collision_mask = 64
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cloud/CharacterBody3D/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.769531, 0.41182, -0.671143)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.230446, 0, 0.286194)
 shape = SubResource("BoxShape3D_k6swm")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="cloud"]
+[node name="cloudSound" type="AudioStreamPlayer3D" parent="cloud"]
 stream = ExtResource("11_8f5g1")
 attenuation_model = 2
 volume_db = 80.0
@@ -170,7 +184,7 @@ stream_paused = true
 max_distance = 7.0
 bus = &"SFX"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ost" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_hwgyn")
 volume_db = -5.0
 autoplay = true

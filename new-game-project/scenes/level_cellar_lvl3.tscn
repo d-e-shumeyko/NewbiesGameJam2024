@@ -299,17 +299,17 @@ script = ExtResource("12_sotm7")
 transform = Transform3D(1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -1.5563, 5.8983, -1.00536)
 shape = SubResource("BoxShape3D_a8wl6")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="levels/level 1/altar/dog2" node_paths=PackedStringArray("timer")]
+[node name="bark" type="AudioStreamPlayer3D" parent="levels/level 1/altar/dog2" node_paths=PackedStringArray("timer")]
 autoplay = true
 max_distance = 6.5
 bus = &"SFX"
 script = ExtResource("13_x2xdr")
 timer = NodePath("Timer")
 
-[node name="Timer" type="Timer" parent="levels/level 1/altar/dog2/AudioStreamPlayer3D"]
+[node name="Timer" type="Timer" parent="levels/level 1/altar/dog2/bark"]
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="levels"]
+[node name="ost" type="AudioStreamPlayer" parent="levels"]
 stream = ExtResource("12_w4sf7")
 autoplay = true
 bus = &"Music"
@@ -351,4 +351,4 @@ environment = SubResource("Environment_tg8ad")
 
 [connection signal="interacted" from="levels/level 1/decoration/breakerBox/StaticBody3D" to="levels/level 1/decoration/breakerBox/StaticBody3D" method="_on_interacted"]
 [connection signal="interacted" from="levels/level 1/altar/dog2/StaticBody3D" to="levels/level 1/altar/dog2/StaticBody3D" method="_on_interacted"]
-[connection signal="timeout" from="levels/level 1/altar/dog2/AudioStreamPlayer3D/Timer" to="levels/level 1/altar/dog2/AudioStreamPlayer3D" method="_on_timer_timeout"]
+[connection signal="timeout" from="levels/level 1/altar/dog2/bark/Timer" to="levels/level 1/altar/dog2/bark" method="_on_timer_timeout"]
