@@ -116,7 +116,7 @@ size = Vector3(0.574707, 2.47949, 2.63452)
 [sub_resource type="BoxShape3D" id="BoxShape3D_hhfym"]
 size = Vector3(0.964386, 2.16003, 1.07736)
 
-[node name="world" type="Node3D"]
+[node name="world2" type="Node3D"]
 process_mode = 3
 
 [node name="level" type="Node" parent="."]

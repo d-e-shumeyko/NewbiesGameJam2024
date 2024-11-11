@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ciljhucct84cu"]
+[gd_scene load_steps=34 format=3 uid="uid://ciljhucct84cu"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6kbqqri77bcj" path="res://tilesets/tileset_cellar.tres" id="1_um21k"]
 [ext_resource type="PackedScene" uid="uid://dqhxgtq4yx2wo" path="res://player.tscn" id="2_ipr0e"]
@@ -141,6 +141,33 @@ _data = {
 "RESET": SubResource("Animation_1wqsq")
 }
 
+[sub_resource type="Animation" id="Animation_n3cm6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("level/decorations/door/Node/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("level/decorations/door/Node/door:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_7v56b"]
 resource_name = "fade_in"
 length = 1.8
@@ -169,33 +196,6 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_n3cm6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("level/decorations/door/Node/ColorRect:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("level/decorations/door/Node/door:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wfmmd"]
 _data = {
 "RESET": SubResource("Animation_n3cm6"),
@@ -207,9 +207,6 @@ fog_enabled = true
 fog_light_energy = 0.04
 fog_density = 0.4
 fog_sky_affect = 0.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ty7n6"]
-size = Vector3(7.56783, 5.84671, 3.60107)
 
 [node name="world" type="Node3D"]
 process_mode = 3
@@ -381,6 +378,7 @@ libraries = {
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.448, 0.525, 8.393)
 collision_layer = 3
 collision_mask = 3
+prompt_message = "Pick Up Lever"
 
 [node name="Transition" parent="levels/level 1/decoration" instance=ExtResource("14_00a0s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.927, 0.533383, -11.9933)
@@ -443,23 +441,6 @@ script = ExtResource("7_fgnsi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_s3jcp")
-
-[node name="empty_takeable" type="StaticBody3D" parent="."]
-transform = Transform3D(-1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0, 0.25, -8.05933, 0.525024, 8.39303)
-collision_layer = 2
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="empty_takeable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120244, 1.6276, -0.0542145)
-shape = SubResource("BoxShape3D_ty7n6")
-
-[node name="CanvasGroup" type="CanvasGroup" parent="empty_takeable"]
-
-[node name="Label" type="Label" parent="empty_takeable/CanvasGroup"]
-offset_left = 585.0
-offset_top = 298.0
-offset_right = 688.0
-offset_bottom = 321.0
 
 [node name="ost" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_5xv63")

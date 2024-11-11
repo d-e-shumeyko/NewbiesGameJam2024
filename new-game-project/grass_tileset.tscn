@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://7gfhdswqt66k" path="res://Assets/grass.glb" id="1_5sfen"]
 
 [node name="grass" instance=ExtResource("1_5sfen")]
+
+[node name="CollisionShape3D" parent="grass/StaticBody3D" index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

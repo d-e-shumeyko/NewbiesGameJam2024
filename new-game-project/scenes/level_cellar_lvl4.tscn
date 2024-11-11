@@ -154,7 +154,7 @@ motion_mode = 1
 script = ExtResource("8_1d6de")
 area = NodePath("Area3D")
 player = NodePath("../../levels/level 1/Player")
-speed = 0.9
+speed = 0.8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="cloud/CharacterBody3D"]
 transform = Transform3D(17.723, 0, 0, 0, 4.09, 0, 0, 0, 4.09, 0.17034, 2.15882, -0.27343)
@@ -180,7 +180,6 @@ attenuation_model = 2
 volume_db = 80.0
 unit_size = 7.0
 max_db = 6.0
-stream_paused = true
 max_distance = 7.0
 bus = &"SFX"
 

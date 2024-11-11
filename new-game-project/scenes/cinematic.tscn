@@ -366,7 +366,7 @@ spot_range = 7.52412
 spot_angle = 16.3747
 
 [node name="dog" parent="Node/Camera3D" instance=ExtResource("3_6iy1a")]
-transform = Transform3D(0.0790876, 0.000565416, 0.0611949, 0.0159476, 0.0963504, -0.0215008, -0.0590831, 0.0267636, 0.0761111, 0, -0.193803, -1.17426)
+transform = Transform3D(0.0790876, 0.000565416, 0.0611949, 0.0159476, 0.0963504, -0.0215008, -0.059083, 0.0267636, 0.0761111, 0, -0.193803, -1.17426)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node/Camera3D/dog"]
 stream = ExtResource("4_jwor8")

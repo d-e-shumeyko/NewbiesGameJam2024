@@ -1,4 +1,4 @@
-extends AudioStreamPlayer3D
+extends AudioStreamPlayer3D 
 
 @export var timer : Timer
 
@@ -33,7 +33,7 @@ func choose_stream():
 	
 	print(random_file)
 func random_time_interval():
-	var time = randi() % 16
+	var time = randi() % 11
 	return time
 	
 	

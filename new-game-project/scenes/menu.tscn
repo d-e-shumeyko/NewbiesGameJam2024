@@ -1,7 +1,66 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1o18p1jbmyoc"]
+[gd_scene load_steps=14 format=3 uid="uid://b1o18p1jbmyoc"]
 
 [ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_n0hha"]
 [ext_resource type="AudioStream" uid="uid://dymkj5oxhkxg3" path="res://Assets/audio/kindaCalmAU.wav" id="2_cbcy4"]
+[ext_resource type="MeshLibrary" uid="uid://crv8r5hrnh27l" path="res://tilesets/grass_tileset.tres" id="3_8p6pi"]
+[ext_resource type="Script" path="res://scripts/menu_animation.gd" id="3_jmkdp"]
+[ext_resource type="PackedScene" uid="uid://dj4sp3o3rud4" path="res://Assets/church.glb" id="4_eo8jw"]
+[ext_resource type="PackedScene" uid="uid://c0i2nalr8shyv" path="res://Assets/car.glb" id="6_47e0e"]
+[ext_resource type="Script" path="res://scripts/doorAudioMenu.gd" id="7_6p38w"]
+
+[sub_resource type="Animation" id="Animation_r5uec"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [45.0]
+}
+
+[sub_resource type="Animation" id="Animation_pqmg6"]
+resource_name = "camera"
+length = 5.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [45.0, 43.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rf6d3"]
+_data = {
+"RESET": SubResource("Animation_r5uec"),
+"camera": SubResource("Animation_pqmg6")
+}
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ed3nm"]
+
+[sub_resource type="Sky" id="Sky_ws65s"]
+sky_material = SubResource("ProceduralSkyMaterial_ed3nm")
+
+[sub_resource type="Environment" id="Environment_epmvw"]
+background_mode = 2
+sky = SubResource("Sky_ws65s")
+ambient_light_source = 3
+ambient_light_color = Color(0.973483, 0.887411, 0.77248, 1)
+ambient_light_energy = 16.0
+fog_enabled = true
+fog_light_color = Color(0.140262, 0.156196, 0.181246, 1)
+fog_light_energy = 0.1
+fog_density = 0.2
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -15,6 +74,7 @@ script = ExtResource("1_n0hha")
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasGroup"]
+visible = false
 offset_left = -1.0
 offset_top = -1.0
 offset_right = 1156.0
@@ -37,25 +97,73 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="CanvasGroup/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "GAME NAME"
+text = "IN A DARK CELLAR"
 
-[node name="START" type="Button" parent="CanvasGroup/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="START" type="Button" parent="CanvasGroup/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "START GAME"
 
-[node name="OPTIONS" type="Button" parent="CanvasGroup/VBoxContainer"]
+[node name="OPTIONS" type="Button" parent="CanvasGroup/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "OPTIONS"
 
-[node name="QUIT" type="Button" parent="CanvasGroup/VBoxContainer"]
+[node name="QUIT" type="Button" parent="CanvasGroup/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "QUIT"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasGroup/VBoxContainer/QUIT"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasGroup/VBoxContainer/VBoxContainer/QUIT"]
 stream = ExtResource("2_cbcy4")
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="CanvasGroup/VBoxContainer/START" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="CanvasGroup/VBoxContainer/OPTIONS" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="CanvasGroup/VBoxContainer/QUIT" to="." method="_on_quit_pressed"]
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("3_jmkdp")
+
+[node name="GridMap" type="GridMap" parent="Node3D"]
+mesh_library = ExtResource("3_8p6pi")
+cell_scale = 2.0
+data = {
+"cells": PackedInt32Array(1, 1, 0, 0, 1, 0, 65535, 1, 0, 65534, 1, 0, 65534, 0, 0, 65534, 65535, 0, 65534, 65534, 0, 65535, 65534, 0, 0, 65534, 0, 1, 65534, 0, 1, 65535, 0, 1, 0, 0, 65535, 0, 0, 0, 0, 0, 0, 65535, 0, 65535, 65535, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 3, 1, 0, 3, 0, 0, 3, 65535, 0, 3, 65534, 0, 3, 65533, 0, 3, 65532, 0, 3, 65531, 0, 3, 65530, 0, 3, 65529, 0, 3, 65528, 0, 3, 65527, 0, 3, 65526, 0, 3, 65525, 0, 3, 65524, 0, 2, 65524, 0, 1, 65524, 0, 0, 65524, 0, 65535, 65524, 0, 65534, 65524, 0, 65533, 65524, 0, 65532, 65524, 0, 65531, 65524, 0, 65531, 65525, 0, 65531, 65526, 0, 65531, 65527, 0, 65531, 65528, 0, 65531, 65529, 0, 65531, 65530, 0, 65531, 65531, 0, 65531, 65532, 0, 65531, 65533, 0, 65531, 65534, 0, 65531, 65535, 0, 65532, 65535, 0, 65532, 0, 0, 65532, 1, 0, 65532, 2, 0, 65531, 2, 0, 65531, 1, 0, 65531, 0, 0, 65533, 2, 0, 65533, 1, 0, 65533, 0, 0, 65533, 65535, 0, 65533, 65534, 0, 65533, 65533, 0, 65533, 65532, 0, 65533, 65531, 0, 65533, 65530, 0, 65533, 65529, 0, 65533, 65528, 0, 65533, 65527, 0, 65533, 65526, 0, 65533, 65525, 0, 65532, 65525, 0, 65532, 65526, 0, 65532, 65527, 0, 65532, 65528, 0, 65532, 65529, 0, 65532, 65530, 0, 65532, 65531, 0, 65532, 65532, 0, 65532, 65533, 0, 65532, 65534, 0, 2, 1, 0, 2, 0, 0, 2, 65535, 0, 2, 65534, 0, 2, 65530, 0, 2, 65529, 0, 2, 65528, 0, 2, 65527, 0, 2, 65526, 0, 2, 65525, 0, 1, 65525, 0, 65534, 65525, 0, 65535, 65525, 0, 0, 65525, 0, 0, 65526, 0, 65535, 65526, 0, 65534, 65526, 0, 1, 65526, 0, 1, 65527, 0, 1, 65528, 0, 1, 65529, 0, 1, 65530, 0, 1, 65531, 0, 2, 65531, 0, 2, 65532, 0, 2, 65533, 0, 1, 65533, 0, 1, 65532, 0, 0, 65532, 0, 0, 65533, 0, 0, 65531, 0, 0, 65530, 0, 0, 65529, 0, 0, 65528, 0, 0, 65527, 0, 65535, 65527, 0, 65534, 65527, 0, 65534, 65528, 0, 65534, 65529, 0, 65534, 65530, 0, 65534, 65531, 0, 65534, 65532, 0, 65534, 65533, 0, 65535, 65533, 0, 65535, 65532, 0, 65535, 65531, 0, 65535, 65530, 0, 65535, 65529, 0, 65535, 65528, 0, 65531, 3, 0, 65533, 3, 0, 65534, 3, 0, 65535, 3, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 65532, 3, 0, 4, 2, 0, 4, 1, 0, 4, 0, 0, 4, 65535, 0, 4, 65534, 0, 4, 65533, 0, 4, 65532, 0, 4, 65531, 0, 4, 65530, 0, 4, 65529, 0, 4, 65528, 0, 4, 65527, 0, 4, 65523, 0, 4, 65524, 0, 4, 65525, 0, 4, 65526, 0)
+}
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(0.700723, 0.150606, 0.697356, 0.0329892, 0.969579, -0.242545, -0.71267, 0.192962, 0.674438, 3.356, 1.4687, 8.14603)
+fov = 45.0
+
+[node name="church" parent="Node3D" instance=ExtResource("4_eo8jw")]
+transform = Transform3D(0.479728, 0, -0.140928, 0, 0.5, 0, 0.140928, 0, 0.479728, -1.3481, 0.918566, -9.20007)
+
+[node name="car" parent="Node3D" instance=ExtResource("6_47e0e")]
+transform = Transform3D(-0.369004, 0, 0.337396, 0, 0.5, 0, -0.337396, 0, -0.369004, -9.37994, 0.945469, 4.94489)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D"]
+libraries = {
+"": SubResource("AnimationLibrary_rf6d3")
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_epmvw")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.73345, 1.49024, 7.85303)
+visible = false
+omni_range = 10.9837
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node3D" node_paths=PackedStringArray("timer")]
+volume_db = -1.0
+bus = &"SFX"
+script = ExtResource("7_6p38w")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Node3D/AudioStreamPlayer"]
+wait_time = 10.0
+autostart = true
+
+[connection signal="pressed" from="CanvasGroup/VBoxContainer/VBoxContainer/START" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CanvasGroup/VBoxContainer/VBoxContainer/OPTIONS" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasGroup/VBoxContainer/VBoxContainer/QUIT" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="Node3D/AudioStreamPlayer/Timer" to="Node3D/AudioStreamPlayer" method="_on_timer_timeout"]
